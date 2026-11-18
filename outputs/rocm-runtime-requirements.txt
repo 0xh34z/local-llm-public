@@ -1,0 +1,4 @@
+rocm==10.0.0
+rocm-sdk-core==10.0.0
+rocm-sdk-device-gfx1152==10.0.0
+rocm-sdk-libraries==10.0.0
