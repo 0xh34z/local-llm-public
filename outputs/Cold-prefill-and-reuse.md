@@ -1,5 +1,7 @@
 # Cold prefill and persistent prefix reuse on the Radeon 860M
 
+> **Note:** This is the public copy of this report. Small summary files (summaries, samples, manifests) are included, with local paths replaced by placeholders such as `<repo>` and `<models>`. The full raw data (request/response dumps, server logs, generated text, build logs and test fixtures) is not public, so some links in this report do not resolve.
+
 The useful new capability is saving a populated server slot to a local file and reloading it after the server restarts. This was tested successfully with over 100K cached tokens, including this model's hybrid and MTP state. It is a conversation-cache operation; it is not filesystem repair or recovery.
 
 Keep ROCm, F16 K/V, MTP 2, context 163840, one slot, batch 2048 and microbatch 512 as the baseline. Microbatch 1024 is a reasonable cold-prefill candidate, but it did not beat 512 in the matched long-context suffix test. Microbatch 2048 was slower in that test. No global optimum or sustained 15 tokens/s floor has been established.
@@ -68,14 +70,14 @@ The launcher now enables a local slot-save directory by default, at `work\slot-c
 Start the server in one terminal:
 
 ```powershell
-$llmTools = 'C:\Users\kasper\Documents\GitHub\local-llm\outputs'
+$llmTools = '.\outputs'
 & "$llmTools\Start-ROCmServer.ps1"
 ```
 
 After Pi has finished a request, pause it. In a second terminal, save the current slot before shutting the server down:
 
 ```powershell
-$llmTools = 'C:\Users\kasper\Documents\GitHub\local-llm\outputs'
+$llmTools = '.\outputs'
 & "$llmTools\Manage-LLMSlot.ps1" -Action Save -Name my-project
 & "$llmTools\Stop-ROCmServer.ps1"
 ```

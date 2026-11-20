@@ -1,0 +1,37 @@
+{
+  "control_sha256": "51230c04fe096226e2a8cd5fc3a37cfc4930c13fc23e086c4c2771bf7343b4b5",
+  "private_sha256": "fe56b1843c1fad6993455bfc46ea7b7c2f58581a49a7f2a9bae1b406e5e8886f",
+  "compile": [
+    "<repo>\\work\\rocm10-build-tools\\Lib\\site-packages\\_rocm_sdk_devel\\lib\\llvm\\bin\\clang++.exe -DGGML_BACKEND_BUILD -DGGML_BACKEND_DL -DGGML_BACKEND_SHARED -DGGML_CUDA_FA_BF16_BF16=1 -DGGML_CUDA_FA_BF16_F16=0 -DGGML_CUDA_FA_BF16_Q4_0=0 -DGGML_CUDA_FA_BF16_Q4_1=0 -DGGML_CUDA_FA_BF16_Q5_0=0 -DGGML_CUDA_FA_BF16_Q5_1=0 -DGGML_CUDA_FA_BF16_Q8_0=0 -DGGML_CUDA_FA_F16_BF16=0 -DGGML_CUDA_FA_F16_F16=1 -DGGML_CUDA_FA_F16_Q4_0=0 -DGGML_CUDA_FA_F16_Q4_1=0 -DGGML_CUDA_FA_F16_Q5_0=0 -DGGML_CUDA_FA_F16_Q5_1=0 -DGGML_CUDA_FA_F16_Q8_0=0 -DGGML_CUDA_FA_Q4_0_BF16=0 -DGGML_CUDA_FA_Q4_0_F16=0 -DGGML_CUDA_FA_Q4_0_Q4_0=1 -DGGML_CUDA_FA_Q4_0_Q4_1=0 -DGGML_CUDA_FA_Q4_0_Q5_0=0 -DGGML_CUDA_FA_Q4_0_Q5_1=0 -DGGML_CUDA_FA_Q4_0_Q8_0=0 -DGGML_CUDA_FA_Q4_1_BF16=0 -DGGML_CUDA_FA_Q4_1_F16=0 -DGGML_CUDA_FA_Q4_1_Q4_0=0 -DGGML_CUDA_FA_Q4_1_Q4_1=0 -DGGML_CUDA_FA_Q4_1_Q5_0=0 -DGGML_CUDA_FA_Q4_1_Q5_1=0 -DGGML_CUDA_FA_Q4_1_Q8_0=0 -DGGML_CUDA_FA_Q5_0_BF16=0 -DGGML_CUDA_FA_Q5_0_F16=0 -DGGML_CUDA_FA_Q5_0_Q4_0=0 -DGGML_CUDA_FA_Q5_0_Q4_1=0 -DGGML_CUDA_FA_Q5_0_Q5_0=0 -DGGML_CUDA_FA_Q5_0_Q5_1=0 -DGGML_CUDA_FA_Q5_0_Q8_0=0 -DGGML_CUDA_FA_Q5_1_BF16=0 -DGGML_CUDA_FA_Q5_1_F16=0 -DGGML_CUDA_FA_Q5_1_Q4_0=0 -DGGML_CUDA_FA_Q5_1_Q4_1=0 -DGGML_CUDA_FA_Q5_1_Q5_0=0 -DGGML_CUDA_FA_Q5_1_Q5_1=0 -DGGML_CUDA_FA_Q5_1_Q8_0=0 -DGGML_CUDA_FA_Q8_0_BF16=0 -DGGML_CUDA_FA_Q8_0_F16=0 -DGGML_CUDA_FA_Q8_0_Q4_0=0 -DGGML_CUDA_FA_Q8_0_Q4_1=0 -DGGML_CUDA_FA_Q8_0_Q5_0=0 -DGGML_CUDA_FA_Q8_0_Q5_1=0 -DGGML_CUDA_FA_Q8_0_Q8_0=1 -DGGML_CUDA_FA_QUANTS=\\\"q4_0-q4_0,q8_0-q8_0,f16-f16,bf16-bf16\\\" -DGGML_HIP_GRAPHS -DGGML_HIP_NO_VMM -DGGML_SCHED_MAX_COPIES=4 -DGGML_SHARED -DGGML_USE_HIP -DUSE_PROF_API=1 -D_CRT_SECURE_NO_WARNINGS -D_XOPEN_SOURCE=600 -D__HIP_PLATFORM_AMD__=1 -Dggml_hip_EXPORTS -I<repo>/work/llama.cpp/ggml/src/ggml-hip/.. -I<repo>/work/llama.cpp/ggml/src/../include -isystem <repo>/work/rocm10-build-tools/Lib/site-packages/_rocm_sdk_devel/include -x c++ --hip-path=<repo>/work/rocm10-build-tools/Lib/site-packages/_rocm_sdk_devel --rocm-device-lib-path=<repo>/work/rocm10-build-tools/Lib/site-packages/_rocm_sdk_devel/lib/llvm/amdgcn/bitcode -O3 -DNDEBUG -std=gnu++17 -D_DLL -D_MT -Xclang --dependent-lib=msvcrt -Xclang -fno-pch-timestamp -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -x hip --offload-arch=gfx1152 -I <repo>\\work\\llama.cpp\\ggml\\src\\ggml-cuda -o <repo>\\work\\hip-workgroup\\workgroup-128.obj -c <repo>\\work\\hip-workgroup\\workgroup-128.cu",
+    "<repo>\\work\\rocm10-build-tools\\Lib\\site-packages\\_rocm_sdk_devel\\lib\\llvm\\bin\\clang++.exe -DGGML_BACKEND_BUILD -DGGML_BACKEND_DL -DGGML_BACKEND_SHARED -DGGML_CUDA_FA_BF16_BF16=1 -DGGML_CUDA_FA_BF16_F16=0 -DGGML_CUDA_FA_BF16_Q4_0=0 -DGGML_CUDA_FA_BF16_Q4_1=0 -DGGML_CUDA_FA_BF16_Q5_0=0 -DGGML_CUDA_FA_BF16_Q5_1=0 -DGGML_CUDA_FA_BF16_Q8_0=0 -DGGML_CUDA_FA_F16_BF16=0 -DGGML_CUDA_FA_F16_F16=1 -DGGML_CUDA_FA_F16_Q4_0=0 -DGGML_CUDA_FA_F16_Q4_1=0 -DGGML_CUDA_FA_F16_Q5_0=0 -DGGML_CUDA_FA_F16_Q5_1=0 -DGGML_CUDA_FA_F16_Q8_0=0 -DGGML_CUDA_FA_Q4_0_BF16=0 -DGGML_CUDA_FA_Q4_0_F16=0 -DGGML_CUDA_FA_Q4_0_Q4_0=1 -DGGML_CUDA_FA_Q4_0_Q4_1=0 -DGGML_CUDA_FA_Q4_0_Q5_0=0 -DGGML_CUDA_FA_Q4_0_Q5_1=0 -DGGML_CUDA_FA_Q4_0_Q8_0=0 -DGGML_CUDA_FA_Q4_1_BF16=0 -DGGML_CUDA_FA_Q4_1_F16=0 -DGGML_CUDA_FA_Q4_1_Q4_0=0 -DGGML_CUDA_FA_Q4_1_Q4_1=0 -DGGML_CUDA_FA_Q4_1_Q5_0=0 -DGGML_CUDA_FA_Q4_1_Q5_1=0 -DGGML_CUDA_FA_Q4_1_Q8_0=0 -DGGML_CUDA_FA_Q5_0_BF16=0 -DGGML_CUDA_FA_Q5_0_F16=0 -DGGML_CUDA_FA_Q5_0_Q4_0=0 -DGGML_CUDA_FA_Q5_0_Q4_1=0 -DGGML_CUDA_FA_Q5_0_Q5_0=0 -DGGML_CUDA_FA_Q5_0_Q5_1=0 -DGGML_CUDA_FA_Q5_0_Q8_0=0 -DGGML_CUDA_FA_Q5_1_BF16=0 -DGGML_CUDA_FA_Q5_1_F16=0 -DGGML_CUDA_FA_Q5_1_Q4_0=0 -DGGML_CUDA_FA_Q5_1_Q4_1=0 -DGGML_CUDA_FA_Q5_1_Q5_0=0 -DGGML_CUDA_FA_Q5_1_Q5_1=0 -DGGML_CUDA_FA_Q5_1_Q8_0=0 -DGGML_CUDA_FA_Q8_0_BF16=0 -DGGML_CUDA_FA_Q8_0_F16=0 -DGGML_CUDA_FA_Q8_0_Q4_0=0 -DGGML_CUDA_FA_Q8_0_Q4_1=0 -DGGML_CUDA_FA_Q8_0_Q5_0=0 -DGGML_CUDA_FA_Q8_0_Q5_1=0 -DGGML_CUDA_FA_Q8_0_Q8_0=1 -DGGML_CUDA_FA_QUANTS=\\\"q4_0-q4_0,q8_0-q8_0,f16-f16,bf16-bf16\\\" -DGGML_HIP_GRAPHS -DGGML_HIP_NO_VMM -DGGML_SCHED_MAX_COPIES=4 -DGGML_SHARED -DGGML_USE_HIP -DUSE_PROF_API=1 -D_CRT_SECURE_NO_WARNINGS -D_XOPEN_SOURCE=600 -D__HIP_PLATFORM_AMD__=1 -Dggml_hip_EXPORTS -I<repo>/work/llama.cpp/ggml/src/ggml-hip/.. -I<repo>/work/llama.cpp/ggml/src/../include -isystem <repo>/work/rocm10-build-tools/Lib/site-packages/_rocm_sdk_devel/include -x c++ --hip-path=<repo>/work/rocm10-build-tools/Lib/site-packages/_rocm_sdk_devel --rocm-device-lib-path=<repo>/work/rocm10-build-tools/Lib/site-packages/_rocm_sdk_devel/lib/llvm/amdgcn/bitcode -O3 -DNDEBUG -std=gnu++17 -D_DLL -D_MT -Xclang --dependent-lib=msvcrt -Xclang -fno-pch-timestamp -Wmissing-declarations -Wmissing-noreturn -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function -Wunreachable-code-break -Wunreachable-code-return -Wmissing-prototypes -Wextra-semi -x hip --offload-arch=gfx1152 -I <repo>\\work\\llama.cpp\\ggml\\src\\ggml-cuda -o <repo>\\work\\hip-workgroup\\fattn.obj -c <repo>\\work\\hip-workgroup\\fattn.cu"
+  ],
+  "link": [
+    "<repo>\\work\\rocm10-build-tools\\Lib\\site-packages\\_rocm_sdk_devel\\lib\\llvm\\bin\\clang++.exe",
+    "-nostartfiles",
+    "-nostdlib",
+    "--hip-path=<repo>/work/rocm10-build-tools/Lib/site-packages/_rocm_sdk_devel",
+    "--rocm-device-lib-path=<repo>/work/rocm10-build-tools/Lib/site-packages/_rocm_sdk_devel/lib/llvm/amdgcn/bitcode",
+    "-O3",
+    "-DNDEBUG",
+    "-D_DLL",
+    "-D_MT",
+    "-Xclang",
+    "--dependent-lib=msvcrt",
+    "-shared",
+    "-fuse-ld=lld",
+    "-o",
+    "<repo>\\work\\hip-workgroup\\bin\\ggml-hip.dll",
+    "-Xlinker",
+    "/MANIFEST:EMBED",
+    "-Xlinker",
+    "/implib:<repo>\\work\\hip-workgroup\\hip.lib",
+    "-Xlinker",
+    "/version:0.27",
+    "@<repo>\\work\\hip-workgroup\\link.rsp"
+  ],
+  "source_sha256": {
+    "fattn.cu": "f43f20188fcb6dde7ba6e04a1b020f5beb14233dc4a20a66111a64ef46119f37",
+    "fattn-mma-f16.cuh": "2c1546405fba2988aa51a46ca0c7094a149f42670f02d13e07efa141e9e06ca4",
+    "fattn-common.cuh": "674dec3869ee21461182941999cd7bd8ddbd3f9b4519eb3f2327d6829c333737"
+  }
+}

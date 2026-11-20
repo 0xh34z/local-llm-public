@@ -1,0 +1,27 @@
+{
+  "input_tokens": 128000,
+  "allocated_context": 163840,
+  "initial_output_tokens": 512,
+  "followup_output_tokens": 256,
+  "reused_prefix_expected": 103194,
+  "split": "double",
+  "model_and_build": {
+    "model_path": "<models>\\Qwen3.6-35B-A3B-MTP-UD-Q4_K_XL.gguf",
+    "build_info": "b11888-48c9f08b7",
+    "n_ctx": 163840
+  },
+  "kv": "f16",
+  "mtp": 2,
+  "batch": 2048,
+  "microbatch": 512,
+  "threads": 8,
+  "scope": "Synthetic performance only; extension from saved prefix, not full cold prefill",
+  "backend_sha256": "51230c04fe096226e2a8cd5fc3a37cfc4930c13fc23e086c4c2771bf7343b4b5",
+  "bracket_order": [
+    "auto",
+    "double",
+    "auto"
+  ],
+  "bracket_warmup_tokens": 64,
+  "bracket_output_tokens": 512
+}

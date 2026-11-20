@@ -1,0 +1,280 @@
+{
+  "hip_sha256": "b3f79a5fa02a5dc65e95b8c36b91867fd213c41125af731d98268b7fcf0ae9d5",
+  "dump_root": "<repo>\\work\\fine-split-screen-fixtures",
+  "numerical": [
+    {
+      "variant": "contiguous100k",
+      "blocks": 8,
+      "gpu_nmse": 6.813384386336998e-05,
+      "cpu_nmse": 0.0021746266892272784,
+      "upstream_exit": 1,
+      "qualified": true
+    },
+    {
+      "variant": "contiguous100k",
+      "blocks": 6,
+      "gpu_nmse": 8.379556314858094e-05,
+      "cpu_nmse": 0.0022358944131280725,
+      "upstream_exit": 1,
+      "qualified": true
+    },
+    {
+      "variant": "contiguous100k",
+      "blocks": 10,
+      "gpu_nmse": 5.331311541385057e-05,
+      "cpu_nmse": 0.002177467858449626,
+      "upstream_exit": 1,
+      "qualified": true
+    },
+    {
+      "variant": "contiguous100k",
+      "blocks": 12,
+      "gpu_nmse": 4.231938484621554e-05,
+      "cpu_nmse": 0.0022324927971204317,
+      "upstream_exit": 1,
+      "qualified": true
+    },
+    {
+      "variant": "strided100k",
+      "blocks": 8,
+      "gpu_nmse": 6.9739387815001e-05,
+      "cpu_nmse": 0.0022092151721559167,
+      "upstream_exit": 1,
+      "qualified": true
+    },
+    {
+      "variant": "strided100k",
+      "blocks": 6,
+      "gpu_nmse": 9.57262946712971e-05,
+      "cpu_nmse": 0.002298051490448835,
+      "upstream_exit": 1,
+      "qualified": true
+    },
+    {
+      "variant": "strided100k",
+      "blocks": 10,
+      "gpu_nmse": 5.854015582076735e-05,
+      "cpu_nmse": 0.0023201502165344935,
+      "upstream_exit": 1,
+      "qualified": true
+    },
+    {
+      "variant": "strided100k",
+      "blocks": 12,
+      "gpu_nmse": 4.54319148558237e-05,
+      "cpu_nmse": 0.0022379259482864632,
+      "upstream_exit": 1,
+      "qualified": true
+    },
+    {
+      "variant": "contiguous160k",
+      "blocks": 8,
+      "gpu_nmse": 9.999574152432871e-05,
+      "cpu_nmse": 0.0032908733023322267,
+      "upstream_exit": 1,
+      "qualified": true
+    },
+    {
+      "variant": "contiguous160k",
+      "blocks": 6,
+      "gpu_nmse": 0.00015402466242056282,
+      "cpu_nmse": 0.0034734962990458753,
+      "upstream_exit": 1,
+      "qualified": true
+    },
+    {
+      "variant": "contiguous160k",
+      "blocks": 10,
+      "gpu_nmse": 8.809719789477345e-05,
+      "cpu_nmse": 0.003377622745585344,
+      "upstream_exit": 1,
+      "qualified": true
+    },
+    {
+      "variant": "contiguous160k",
+      "blocks": 12,
+      "gpu_nmse": 6.926536129327008e-05,
+      "cpu_nmse": 0.0033457988462150907,
+      "upstream_exit": 1,
+      "qualified": true
+    },
+    {
+      "variant": "strided160k",
+      "blocks": 8,
+      "gpu_nmse": 0.00010813239180834475,
+      "cpu_nmse": 0.0035999932844690565,
+      "upstream_exit": 1,
+      "qualified": true
+    },
+    {
+      "variant": "strided160k",
+      "blocks": 6,
+      "gpu_nmse": 0.00015701012338664825,
+      "cpu_nmse": 0.0035269263075585334,
+      "upstream_exit": 1,
+      "qualified": true
+    },
+    {
+      "variant": "strided160k",
+      "blocks": 10,
+      "gpu_nmse": 8.699758957323859e-05,
+      "cpu_nmse": 0.0034405950980105075,
+      "upstream_exit": 1,
+      "qualified": true
+    },
+    {
+      "variant": "strided160k",
+      "blocks": 12,
+      "gpu_nmse": 7.289342379014887e-05,
+      "cpu_nmse": 0.0033441958322520844,
+      "upstream_exit": 1,
+      "qualified": true
+    }
+  ],
+  "performance": [
+    {
+      "variant": "strided100k",
+      "repeat": 1,
+      "blocks": 8,
+      "us": 3600.74
+    },
+    {
+      "variant": "strided100k",
+      "repeat": 1,
+      "blocks": 6,
+      "us": 4008.91
+    },
+    {
+      "variant": "strided100k",
+      "repeat": 1,
+      "blocks": 10,
+      "us": 5144.27
+    },
+    {
+      "variant": "strided100k",
+      "repeat": 1,
+      "blocks": 12,
+      "us": 5406.56
+    },
+    {
+      "variant": "strided100k",
+      "repeat": 2,
+      "blocks": 12,
+      "us": 5392.41
+    },
+    {
+      "variant": "strided100k",
+      "repeat": 2,
+      "blocks": 10,
+      "us": 5609.57
+    },
+    {
+      "variant": "strided100k",
+      "repeat": 2,
+      "blocks": 6,
+      "us": 4017.15
+    },
+    {
+      "variant": "strided100k",
+      "repeat": 2,
+      "blocks": 8,
+      "us": 3527.07
+    },
+    {
+      "variant": "strided100k",
+      "repeat": 3,
+      "blocks": 10,
+      "us": 5126.67
+    },
+    {
+      "variant": "strided100k",
+      "repeat": 3,
+      "blocks": 8,
+      "us": 3560.8
+    },
+    {
+      "variant": "strided100k",
+      "repeat": 3,
+      "blocks": 12,
+      "us": 5396.28
+    },
+    {
+      "variant": "strided100k",
+      "repeat": 3,
+      "blocks": 6,
+      "us": 4066.94
+    },
+    {
+      "variant": "strided160k",
+      "repeat": 1,
+      "blocks": 8,
+      "us": 6496.81
+    },
+    {
+      "variant": "strided160k",
+      "repeat": 1,
+      "blocks": 6,
+      "us": 6326.91
+    },
+    {
+      "variant": "strided160k",
+      "repeat": 1,
+      "blocks": 10,
+      "us": 8090.42
+    },
+    {
+      "variant": "strided160k",
+      "repeat": 1,
+      "blocks": 12,
+      "us": 8670.88
+    },
+    {
+      "variant": "strided160k",
+      "repeat": 2,
+      "blocks": 12,
+      "us": 8483.78
+    },
+    {
+      "variant": "strided160k",
+      "repeat": 2,
+      "blocks": 10,
+      "us": 8038.31
+    },
+    {
+      "variant": "strided160k",
+      "repeat": 2,
+      "blocks": 6,
+      "us": 6425.41
+    },
+    {
+      "variant": "strided160k",
+      "repeat": 2,
+      "blocks": 8,
+      "us": 5690.7
+    },
+    {
+      "variant": "strided160k",
+      "repeat": 3,
+      "blocks": 10,
+      "us": 8159.88
+    },
+    {
+      "variant": "strided160k",
+      "repeat": 3,
+      "blocks": 8,
+      "us": 5649.04
+    },
+    {
+      "variant": "strided160k",
+      "repeat": 3,
+      "blocks": 12,
+      "us": 8635.99
+    },
+    {
+      "variant": "strided160k",
+      "repeat": 3,
+      "blocks": 6,
+      "us": 6623.1
+    }
+  ]
+}

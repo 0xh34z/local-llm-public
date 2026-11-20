@@ -1,0 +1,52 @@
+{
+  "control": {
+    "object": "work\\hip-diagnostic-build\\ggml\\src\\ggml-hip\\CMakeFiles\\ggml-hip.dir\\__\\ggml-cuda\\template-instances\\fattn-mma-f16-instance-ncols1_4-ncols2_8.cu.obj",
+    "image_sha256": "119375ab6f9a513f21013da8ec2b6e67f08bd252cafccfe7900cd3b618dd247a",
+    "mangled_name": "_ZL18flash_attn_ext_f16ILi256ELi256ELi4ELi8ELb0ELb0ELb0EEvPKcS1_S1_S1_S1_PKiPfP15HIP_vector_typeIfLj2EEffffjfiS5_IjLj3EEiiiiiiiiiiixiixiiiiix",
+    "verified_image_offsets": {
+      "work\\hip-kv-split-bin\\ggml-hip.dll": 41325056,
+      "work\\hip-workgroup\\bin\\ggml-hip.dll": 41653760
+    },
+    "max_flat_workgroup_size": 256,
+    "wavefront_size": 32,
+    "sgpr_count": 107,
+    "vgpr_count": 256,
+    "sgpr_spill_count": 0,
+    "vgpr_spill_count": 169,
+    "private_segment_fixed_size": 416,
+    "group_segment_fixed_size": 0,
+    "workgroup_processor_mode": 1
+  },
+  "threads_128": {
+    "object": "work\\hip-workgroup\\workgroup-128.obj",
+    "image_sha256": "c557dd2bf5b068499cf1de7d2020ed3c1bf02f185ab4b3bbc619890f8f16b383",
+    "mangled_name": "_ZL32flash_attn_ext_f16_workgroup_128ILi256ELi256ELi4ELi8ELb0ELb0ELb0EEvPKcS1_S1_S1_S1_PKiPfP15HIP_vector_typeIfLj2EEffffjfiS5_IjLj3EEiiiiiiiiiiixiixiiiiix",
+    "verified_image_offsets": {
+      "work\\hip-workgroup\\bin\\ggml-hip.dll": 18146816
+    },
+    "max_flat_workgroup_size": 128,
+    "wavefront_size": 32,
+    "sgpr_count": 103,
+    "vgpr_count": 256,
+    "sgpr_spill_count": 0,
+    "vgpr_spill_count": 478,
+    "private_segment_fixed_size": 1312,
+    "group_segment_fixed_size": 0,
+    "workgroup_processor_mode": 1
+  },
+  "q_lds_256": {
+    "object": "work\\hip-wg-metadata\\qlds\\qlds-256.obj",
+    "image_sha256": "46e336dd33821dce03d04ef6f84c86f21aa0b712e1acd9561d984f0873b9f1da",
+    "mangled_name": "_ZL27flash_attn_ext_f16_qlds_256ILi256ELi256ELi4ELi8ELb0ELb0ELb0EEvPKcS1_S1_S1_S1_PKiPfP15HIP_vector_typeIfLj2EEffffjfiS5_IjLj3EEiiiiiiiiiiixiixiiiiix",
+    "verified_image_offsets": {},
+    "max_flat_workgroup_size": 256,
+    "wavefront_size": 32,
+    "sgpr_count": 98,
+    "vgpr_count": 256,
+    "sgpr_spill_count": 0,
+    "vgpr_spill_count": 13,
+    "private_segment_fixed_size": 56,
+    "group_segment_fixed_size": 0,
+    "workgroup_processor_mode": 1
+  }
+}

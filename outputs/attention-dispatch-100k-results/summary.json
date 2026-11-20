@@ -1,0 +1,46 @@
+{
+  "auto_mean_tps": 15.073446606621102,
+  "auto_first_mean_tps": 15.329082489199045,
+  "auto_last_mean_tps": 14.817810724043161,
+  "auto_drift_percent": -3.335305720457371,
+  "auto_range_tps": [
+    14.362811605422134,
+    15.99080334409713
+  ],
+  "auto_primary_samples": 6,
+  "vector_tps": 1.9251848553060886,
+  "vector_primary_samples": 1,
+  "vector_change_percent": -87.2279717734865,
+  "primary_unique_request_hashes": 1,
+  "auto_paired_output_match": true,
+  "vector_first_output_matches_auto": false,
+  "greedy_auto_samples": [
+    {
+      "case": 1,
+      "mode": "auto",
+      "trial": "greedy",
+      "temperature": 0.0,
+      "tps": 15.924257984219997,
+      "ttft_s": 0.6106163999993441,
+      "wall_s": 16.63128510000024,
+      "draft_n": 206,
+      "accepted_drafts": 152,
+      "request_sha256": "a823dbc0872e6cae5c6d44d69e27036e82274529e385d391b48ee8a03c70405c",
+      "output_sha256": "1ab98f9004bd4c23b98142eae27fa7bab9e6aa484537bba8030d395f337cf71c"
+    },
+    {
+      "case": 3,
+      "mode": "auto",
+      "trial": "greedy",
+      "temperature": 0.0,
+      "tps": 15.797739374471472,
+      "ttft_s": 0.5949590000000171,
+      "wall_s": 16.744017099999837,
+      "draft_n": 206,
+      "accepted_drafts": 152,
+      "request_sha256": "a823dbc0872e6cae5c6d44d69e27036e82274529e385d391b48ee8a03c70405c",
+      "output_sha256": "1ab98f9004bd4c23b98142eae27fa7bab9e6aa484537bba8030d395f337cf71c"
+    }
+  ],
+  "decision": "Reject tile on float64 numerical gate; reject vector on severe practical throughput regression; retain automatic MMA selection"
+}

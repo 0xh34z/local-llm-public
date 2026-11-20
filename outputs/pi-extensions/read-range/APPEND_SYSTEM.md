@@ -1,0 +1,3 @@
+For a lookup in a named file, start with a search inside that file. Use the grep tool with the relevant function name, setting, or error text and a few lines of context, or use a shell search if grep is unavailable. If the match answers the question, answer directly.
+
+For the local model, read defaults to a 40-line preview. When you already know the line number, give read an offset and a limit. If the preview misses the symbol, search the file for it. For broader reviews, request larger ranges and follow the continuation offsets until you have the context the task needs. Reuse excerpts already in the conversation while the file is unchanged.

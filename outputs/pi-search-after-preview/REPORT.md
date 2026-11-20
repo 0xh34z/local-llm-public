@@ -1,5 +1,7 @@
 # Automatic file lookup in Pi
 
+> **Note:** This is the public copy of this report. Small summary files (summaries, samples, manifests) are included, with local paths replaced by placeholders such as `<repo>` and `<models>`. The full raw data (request/response dumps, server logs, generated text, build logs and test fixtures) is not public, so some links in this report do not resolve.
+
 Pi answered an ordinary question about a function in the middle of a 603-line Python file. With a 40-line preview and a search suggestion attached to the tool result, it found the function at line 301 and correctly answered that the delay reaches its cap of 37 on attempt 4. The user supplied the filename and question without a line number or slash command. [Tool calls and answer](tool-result.json)
 
 | Behavior | Model requests | Initial input tokens | New input tokens across follow-ups | Output tokens across all requests | Total time in model requests |
@@ -12,7 +14,7 @@ All three runs answered correctly. The first read the entire file. The second fo
 
 ## Using it
 
-Open Pi in the trusted repository root with project extensions enabled and the local `llama_cpp` provider selected. Use `/reload` for an existing session, then ask normally. The extension supplies a 40-line default for a direct read with no explicit limit. Pi can request larger excerpts as needed. When a partial text result includes a continuation offset, the extension points Pi to an available file search tool. [Project instructions](../../.pi/APPEND_SYSTEM.md) · [Extension](../../.pi/extensions/local-read.js)
+Open Pi in the trusted repository root with project extensions enabled and the local `llama_cpp` provider selected. Use `/reload` for an existing session, then ask normally. The extension supplies a 40-line default for a direct read with no explicit limit. Pi can request larger excerpts as needed. When a partial text result includes a continuation offset, the extension points Pi to an available file search tool. [Project instructions](../pi-extensions/read-range/APPEND_SYSTEM.md) · [Extension](../pi-extensions/read-range/local-read.js)
 
 ## Measurement scope
 

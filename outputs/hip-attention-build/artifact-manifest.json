@@ -1,0 +1,11 @@
+{
+  "OriginalBackendUnchanged": true,
+  "PriorDiagnosticOverlayUnchanged": true,
+  "ExperimentDll": {
+    "Algorithm": "SHA256",
+    "Hash": "F28F5B131031D43C5DBCC9D5E23A852C1ECE786157468E066C11573AF9DDF9E8",
+    "Path": "<repo>\\work\\hip-attention-experiment-bin\\ggml-hip.dll"
+  },
+  "SourceCommit": "48c9f08b7b25766324282b7605177e2f2be755bb",
+  "ServersRemaining": 0
+}

@@ -1,0 +1,38 @@
+{
+  "order": [
+    "auto",
+    "vec",
+    "auto"
+  ],
+  "primary_temperature": 0.6,
+  "primary_repetitions": 3,
+  "primary_output_tokens": 256,
+  "greedy_repetitions": 1,
+  "warmup_output_tokens": 64,
+  "model_build": {
+    "model_path": "<models>\\Qwen3.6-35B-A3B-MTP-UD-Q4_K_XL.gguf",
+    "build_info": "b11888-48c9f08b7",
+    "n_ctx": 163840
+  },
+  "context": 163840,
+  "batch": 2048,
+  "microbatch": 512,
+  "threads": 8,
+  "mtp": 2,
+  "kv": "f16",
+  "override": "gfx1152, Q3 D256 H16, KV heads2 F16, >=100K padded KV; other shapes unchanged",
+  "normal_execution": "Profiling disabled; graph replay remains enabled",
+  "oracle": {
+    "gpu": {
+      "nmse_vs_float64": 3.281825624556511e-05,
+      "max_absolute_error": 5.888141324561502e-05,
+      "relative_rms_error": 0.0057287220429660494
+    },
+    "cpu": {
+      "nmse_vs_float64": 0.0021826757476043315,
+      "max_absolute_error": 0.0007847104980976526,
+      "relative_rms_error": 0.04671911544115889
+    }
+  },
+  "backend_sha256": "f28f5b131031d43c5dbcc9d5e23a852c1ece786157468e066c11573af9ddf9e8"
+}

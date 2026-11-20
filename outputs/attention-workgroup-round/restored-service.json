@@ -1,0 +1,11 @@
+{
+    "utc":  "2026-11-18T23:27:40.3011876Z",
+    "process_id":  5296,
+    "command_line":  "\"<repo>\\work\\hip-kv-split-bin\\llama-server.exe\" -m <models>\\Qwen3.6-35B-A3B-MTP-UD-Q4_K_XL.gguf --device ROCm0 -c 163840 -np 1 -ngl 99 -fa on --jinja -ctk f16 -ctv f16 -b 2048 -ub 512 -t 8 -tb 8 -td 8 -tbd 8 --spec-type draft-mtp --spec-draft-n-max 2 --port 9931 -lm auto -lv 3 --slot-save-path <repo>\\work\\slot-cache",
+    "backend_sha256":  "51230C04FE096226E2A8CD5FC3A37CFC4930C13FC23E086C4C2771BF7343B4B5",
+    "health":  "ok",
+    "pi_cli_reply":  "READY",
+    "pi_cli_exit":  0,
+    "slot_tokens_restored":  3861,
+    "log":  "work/pi-live-20261119-002715.log"
+}

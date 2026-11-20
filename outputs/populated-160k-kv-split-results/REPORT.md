@@ -1,5 +1,7 @@
 # Populated 160K: useful optimization, no dependable 15 TPS floor
 
+> **Note:** This is the public copy of this report. Small summary files (summaries, samples, manifests) are included, with local paths replaced by placeholders such as `<repo>` and `<models>`. The full raw data (request/response dumps, server logs, generated text, build logs and test fixtures) is not public, so some links in this report do not resolve.
+
 The eight-block backend completed actual 160000-token input without truncation, but generation varied substantially by request. The initial 512-token generation reached **17.610 TPS**; a subsequent 256-token cached follow-up measured **13.631 TPS**, below the user's practical target. A separate restored-prefix comparison measured **15.150 TPS** for eight blocks versus **12.850 TPS** for neighboring automatic controls, an observed **17.90% gain**.
 
 Thus the optimization remains useful at this context, while 160K actual input is not established as consistently usable under a 15 TPS floor. Allocation remained 163840 throughout; these are populated-context measurements, not allocation-only tests.

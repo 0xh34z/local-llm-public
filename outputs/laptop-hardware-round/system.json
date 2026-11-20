@@ -1,0 +1,39 @@
+﻿{
+    "machine":  {
+                    "Manufacturer":  "Framework",
+                    "Model":  "Laptop 13 (AMD Ryzen AI 300 Series)"
+                },
+    "processor":  {
+                      "Name":  "AMD Ryzen AI 7 350 w/ Radeon 860M              ",
+                      "NumberOfCores":  8,
+                      "NumberOfLogicalProcessors":  16
+                  },
+    "memory":  [
+                   {
+                       "Capacity":  34359738368,
+                       "ConfiguredClockSpeed":  5600,
+                       "DataWidth":  64,
+                       "BankLabel":  "P0 CHANNEL A"
+                   },
+                   {
+                       "Capacity":  34359738368,
+                       "ConfiguredClockSpeed":  5600,
+                       "DataWidth":  64,
+                       "BankLabel":  "P0 CHANNEL B"
+                   }
+               ],
+    "gpu":  [
+                {
+                    "Name":  "AMD Radeon (TM) 860M Graphics",
+                    "DriverVersion":  "32.0.32015.7029"
+                }
+            ],
+    "windows":  {
+                    "Caption":  "Microsoft Windows 11 IoT Enterprise LTSC",
+                    "Version":  "10.0.26100",
+                    "BuildNumber":  "26100"
+                },
+    "adlx_sdk":  "32b5a740d42295c5dfe9026b9f52683da0f3af91",
+    "adlx_version":  "1.5.0.124",
+    "ac_scheme":  "Power Scheme GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (Balanced)"
+}

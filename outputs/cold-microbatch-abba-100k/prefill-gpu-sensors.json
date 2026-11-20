@@ -1,0 +1,184 @@
+{
+  "sensor_source": "outputs/laptop-hardware-round/gpu-sensors.csv",
+  "sensor_source_units": "Unix milliseconds recorded immediately after ADLX GetCurrentGPUMetrics.",
+  "window_method": "Request start UTC = original NTFS cold-events.jsonl last-write time minus the final SSE elapsed_s. Estimated prefill end = request start + first generated token elapsed_s. Estimated prefill start = end minus final server prompt_ms. Select UTC readings in [start,end).",
+  "aggregation": "Unweighted arithmetic means and min/max of valid periodic readings. GPU power is the ADLX GPU metric. Board-power readings were absent.",
+  "cases": [
+    {
+      "case": "case-1-512",
+      "events_last_write_utc": "2026-11-18T19:37:37.315Z",
+      "last_event_elapsed_s": 737.0378168999996,
+      "request_json_last_write_utc": "2026-11-18T19:25:20.287Z",
+      "request_start_estimate_utc": "2026-11-18T19:25:20.277Z",
+      "estimated_request_start_minus_request_file_last_write_ms": -10.06,
+      "first_token_elapsed_s": 708.3212325999993,
+      "prompt_ms": 708252.71,
+      "prefill_start_estimate_utc": "2026-11-18T19:25:20.346Z",
+      "prefill_end_estimate_utc": "2026-11-18T19:37:08.599Z",
+      "n": 30,
+      "first_sensor_utc": "2026-11-18T19:29:52.708Z",
+      "last_sensor_utc": "2026-11-18T19:37:08.058Z",
+      "seconds_to_first_sample": 272.362,
+      "seconds_after_last_sample": 0.541,
+      "sampling_interval_s": {
+        "min": 15.002,
+        "median": 15.011,
+        "max": 15.041
+      },
+      "metrics": {
+        "gpu_temperature_c": {
+          "min": 67.0,
+          "mean": 70.133333,
+          "max": 74.0
+        },
+        "gpu_clock_mhz": {
+          "min": 2479.0,
+          "mean": 2697.4,
+          "max": 2844.0
+        },
+        "gpu_usage_percent": {
+          "min": 96.0,
+          "mean": 99.433333,
+          "max": 100.0
+        },
+        "gpu_power_w": {
+          "min": 24.0,
+          "mean": 24.5,
+          "max": 25.0
+        }
+      }
+    },
+    {
+      "case": "case-2-1024",
+      "events_last_write_utc": "2026-11-18T19:49:34.617Z",
+      "last_event_elapsed_s": 704.1747396999999,
+      "request_json_last_write_utc": "2026-11-18T19:37:50.437Z",
+      "request_start_estimate_utc": "2026-11-18T19:37:50.443Z",
+      "estimated_request_start_minus_request_file_last_write_ms": 5.67,
+      "first_token_elapsed_s": 675.310822899999,
+      "prompt_ms": 675265.852,
+      "prefill_start_estimate_utc": "2026-11-18T19:37:50.488Z",
+      "prefill_end_estimate_utc": "2026-11-18T19:49:05.753Z",
+      "n": 45,
+      "first_sensor_utc": "2026-11-18T19:37:53.106Z",
+      "last_sensor_utc": "2026-11-18T19:48:53.545Z",
+      "seconds_to_first_sample": 2.618,
+      "seconds_after_last_sample": 12.209,
+      "sampling_interval_s": {
+        "min": 15.002,
+        "median": 15.009,
+        "max": 15.02
+      },
+      "metrics": {
+        "gpu_temperature_c": {
+          "min": 68.0,
+          "mean": 71.311111,
+          "max": 74.0
+        },
+        "gpu_clock_mhz": {
+          "min": 2437.0,
+          "mean": 2705.533333,
+          "max": 2877.0
+        },
+        "gpu_usage_percent": {
+          "min": 94.0,
+          "mean": 99.466667,
+          "max": 100.0
+        },
+        "gpu_power_w": {
+          "min": 24.0,
+          "mean": 24.666667,
+          "max": 25.0
+        }
+      }
+    },
+    {
+      "case": "case-3-1024",
+      "events_last_write_utc": "2026-11-18T20:01:31.642Z",
+      "last_event_elapsed_s": 704.0232236000011,
+      "request_json_last_write_utc": "2026-11-18T19:49:47.621Z",
+      "request_start_estimate_utc": "2026-11-18T19:49:47.619Z",
+      "estimated_request_start_minus_request_file_last_write_ms": -2.24,
+      "first_token_elapsed_s": 675.2212780000009,
+      "prompt_ms": 675175.924,
+      "prefill_start_estimate_utc": "2026-11-18T19:49:47.664Z",
+      "prefill_end_estimate_utc": "2026-11-18T20:01:02.840Z",
+      "n": 45,
+      "first_sensor_utc": "2026-11-18T19:49:53.585Z",
+      "last_sensor_utc": "2026-11-18T20:00:54.022Z",
+      "seconds_to_first_sample": 5.92,
+      "seconds_after_last_sample": 8.819,
+      "sampling_interval_s": {
+        "min": 15.004,
+        "median": 15.009,
+        "max": 15.02
+      },
+      "metrics": {
+        "gpu_temperature_c": {
+          "min": 65.0,
+          "mean": 71.044444,
+          "max": 73.0
+        },
+        "gpu_clock_mhz": {
+          "min": 2437.0,
+          "mean": 2692.133333,
+          "max": 2854.0
+        },
+        "gpu_usage_percent": {
+          "min": 97.0,
+          "mean": 99.533333,
+          "max": 100.0
+        },
+        "gpu_power_w": {
+          "min": 24.0,
+          "mean": 24.666667,
+          "max": 25.0
+        }
+      }
+    },
+    {
+      "case": "case-4-512",
+      "events_last_write_utc": "2026-11-18T20:13:57.858Z",
+      "last_event_elapsed_s": 733.117224900001,
+      "request_json_last_write_utc": "2026-11-18T20:01:44.730Z",
+      "request_start_estimate_utc": "2026-11-18T20:01:44.740Z",
+      "estimated_request_start_minus_request_file_last_write_ms": 10.1,
+      "first_token_elapsed_s": 704.3471544999993,
+      "prompt_ms": 704304.133,
+      "prefill_start_estimate_utc": "2026-11-18T20:01:44.783Z",
+      "prefill_end_estimate_utc": "2026-11-18T20:13:29.088Z",
+      "n": 47,
+      "first_sensor_utc": "2026-11-18T20:01:54.083Z",
+      "last_sensor_utc": "2026-11-18T20:13:24.587Z",
+      "seconds_to_first_sample": 9.299,
+      "seconds_after_last_sample": 4.501,
+      "sampling_interval_s": {
+        "min": 15.004,
+        "median": 15.01,
+        "max": 15.02
+      },
+      "metrics": {
+        "gpu_temperature_c": {
+          "min": 70.0,
+          "mean": 71.93617,
+          "max": 75.0
+        },
+        "gpu_clock_mhz": {
+          "min": 2490.0,
+          "mean": 2713.148936,
+          "max": 2864.0
+        },
+        "gpu_usage_percent": {
+          "min": 97.0,
+          "mean": 99.659574,
+          "max": 100.0
+        },
+        "gpu_power_w": {
+          "min": 24.0,
+          "mean": 24.617021,
+          "max": 25.0
+        }
+      }
+    }
+  ]
+}

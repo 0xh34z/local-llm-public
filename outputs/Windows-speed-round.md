@@ -1,5 +1,7 @@
 # Windows inference and Pi file reads
 
+> **Note:** This is the public copy of this report. Small summary files (summaries, samples, manifests) are included, with local paths replaced by placeholders such as `<repo>` and `<models>`. The full raw data (request/response dumps, server logs, generated text, build logs and test fixtures) is not public, so some links in this report do not resolve.
+
 On the Ryzen AI 7 350 / Radeon 860M, keep the existing eight-block attention launcher for long-context generation. For questions about a known part of a file, Pi can save substantial time by asking its read tool for the relevant lines. The project now includes a prompt template for that workflow.
 
 ## Live Pi tool cycles
@@ -15,7 +17,7 @@ Pi 1.5.2 ran its installed CLI and built-in read tool against a local b11888 ser
 
 The two-line request saved 19.71 seconds to first output after the tool returned in the matched-file comparison. Adding both model requests in each cycle gives 26.43 seconds for the full file and 6.26 seconds for the range. Each row is one observed tool cycle. Full and ranged reads used different instructions, and the model chose its own tool arguments and answer length. The measurement begins at Pi's provider request hook and counts the first nonempty content, reasoning, or tool-call delta. The table excludes server startup, the initial request that decided to call the tool, and filesystem read time. The synthetic task tests lookup of an already identified function.
 
-From Pi in this project, use `/read-range <file> <first-line> <number-of-lines> <question>`. For example, `/read-range outputs/Start-KVSplitServer.ps1 1 12 Which batch sizes does the launcher default to?`. A running Pi session can discover the project template after `/reload` when project resources are enabled. The model can ask for further context when the snippet is insufficient. [Project template](../.pi/prompts/read-range.md)
+From Pi in this project, use `/read-range <file> <first-line> <number-of-lines> <question>`. For example, `/read-range outputs/Start-KVSplitServer.ps1 1 12 Which batch sizes does the launcher default to?`. A running Pi session can discover the project template after `/reload` when project resources are enabled. The model can ask for further context when the snippet is insufficient. [Project template](pi-extensions/read-range/read-range.md)
 
 The harness used an isolated Pi profile, local-only provider, the read tool, thinking off, seed 42, temperature zero and a 384-token output limit. The evidence includes request timings, server logs, CLI events, tool arguments and responses. [Small file](pi-prefix-windows-run/requests.jsonl) · [Full file](pi-full-read-windows/requests.jsonl) · [Range](pi-range-read-windows/requests.jsonl) · [Template and verified answer](pi-template-windows/tool-result.json) · [Pi runner](run_pi_prefix.py)
 

@@ -1,0 +1,18 @@
+{
+  "kind": "synthetic repeated-structure unique Python modules; performance only",
+  "input_tokens": 102400,
+  "corpus_sha256": "c1e3a1be7c882faf1391b4af246093e6767a1fcb0d4f26235528a7fa990ad2ae",
+  "model": "<models>\\Qwen3.6-35B-A3B-MTP-UD-Q4_K_XL.gguf",
+  "build": "b11888-48c9f08b7",
+  "mtp": "process command line verified draft-mtp, n-max=2",
+  "allocated_context": 163840,
+  "cache_type_k": "f16",
+  "cache_type_v": "f16",
+  "server_launch": {
+    "ProcessId": 22484,
+    "ExecutablePath": "<downloads>\\llama-b11888-bin-win-rocm-10.0-x64\\llama-server.exe",
+    "CommandLine": "\"<downloads>\\llama-b11888-bin-win-rocm-10.0-x64\\llama-server.exe\" -m <models>\\Qwen3.6-35B-A3B-MTP-UD-Q4_K_XL.gguf --device ROCm0 -c 163840 -np 1 -ngl 99 -fa on --jinja -ctk f16 -ctv f16 -b 2048 -ub 1024 -t 8 --spec-type draft-mtp --spec-draft-n-max 2 --port 9931 -lm auto -lv 4 --slot-save-path <old-workspace>\\work\\slot-cache"
+  },
+  "sampling": "temperature .6, top_p .95, top_k 20, min_p 0, seed 42",
+  "forced_length": true
+}

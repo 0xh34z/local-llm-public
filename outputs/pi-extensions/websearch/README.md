@@ -7,10 +7,10 @@ Tavily-backed `web_search` and `web_read` for Pi 1.4.0. Uses Pi's native extensi
 Run locally in PowerShell (do not paste your key into a chat):
 
 ```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File "C:\Users\kasper\Documents\GitHub\local-llm\outputs\pi-extensions\websearch\Setup-Tavily.ps1"
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".\outputs\pi-extensions\websearch\Setup-Tavily.ps1"
 ```
 
-The prompt hides typing and writes the key to `C:\Users\kasper\.pi\agent\websearch.json`, a plaintext credential file outside this repository. Keep it private and out of Git. Alternatively, supply `TAVILY_API_KEY` in Pi's process environment; it takes precedence. The extension reads configuration per call, so changing the file does not require restarting Pi. Never add the key to a model prompt or tool arguments.
+The prompt hides typing and writes the key to `~\.pi\agent\websearch.json`, a plaintext credential file outside this repository. Keep it private and out of Git. Alternatively, supply `TAVILY_API_KEY` in Pi's process environment; it takes precedence. The extension reads configuration per call, so changing the file does not require restarting Pi. Never add the key to a model prompt or tool arguments.
 
 After installation, use `/reload` or restart Pi, then `/websearch-status`. That command checks local configuration without network access, spending credits, or displaying the key. It does not validate the key against Tavily. For a live end-to-end check, ask Pi: **Use web_search to find the official Python asyncio documentation, then use web_read on the relevant source and cite it.** This makes paid API calls under your Tavily plan.
 

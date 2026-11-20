@@ -1,0 +1,40 @@
+{
+  "order": [
+    [
+      2048,
+      8,
+      512
+    ],
+    [
+      2048,
+      8,
+      256
+    ],
+    [
+      2048,
+      8,
+      128
+    ],
+    [
+      2048,
+      8,
+      512
+    ]
+  ],
+  "context": 163840,
+  "microbatch": "see order triples: batch, threads, microbatch",
+  "kv": "f16",
+  "mtp": 2,
+  "generation_threads": 8,
+  "repeats": 2,
+  "measured_suffix_tokens": 4096,
+  "warmup_suffix_tokens": 1024,
+  "output_tokens": 1,
+  "snapshot": "synthetic-helper-check.bin",
+  "server": {
+    "model_path": "<models>\\Qwen3.6-35B-A3B-MTP-UD-Q4_K_XL.gguf",
+    "build_info": "b11888-48c9f08b7",
+    "n_ctx": 163840
+  },
+  "scope": "Native completion from baseline slot; not a fresh cold 100K input or generation benchmark"
+}

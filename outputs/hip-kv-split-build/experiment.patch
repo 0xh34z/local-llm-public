@@ -1,0 +1,253 @@
+diff --git a/ggml/src/ggml-cuda/fattn-common.cuh b/ggml/src/ggml-cuda/fattn-common.cuh
+index 41d9483..ec5e6fb 100644
+--- a/ggml/src/ggml-cuda/fattn-common.cuh
++++ b/ggml/src/ggml-cuda/fattn-common.cuh
+@@ -6,6 +6,11 @@
+ 
+ #include <cstdint>
+ 
++#ifdef GGML_USE_HIP
++int ggml_cuda_fattn_kv_split_experiment(int cc, const ggml_tensor * dst, int ncols1, int ncols2,
++        int normal_blocks, int max_blocks, int ntiles_dst, int ntiles_kv, int nwarps, size_t shared_bytes, int nbatch_fa);
++#endif
++
+ #define FATTN_KQ_STRIDE       256
+ #define HALF_MAX_HALF         __float2half(65504.0f/2) // Use neg. of this instead of -INFINITY to initialize KQ max vals to avoid NaN upon subtraction.
+ #define SOFTMAX_FTZ_THRESHOLD -20.0f                   // Softmax exp. of values smaller than this are flushed to zero to avoid NaNs.
+@@ -1178,9 +1183,13 @@ void launch_fattn(
+             const int efficiency_loss_percent = nblocks_stream_k_rounded > 0
+                 ? 100 * (nblocks_stream_k_raw - nblocks_stream_k_rounded) / nblocks_stream_k_raw
+                 : 100;
+-            const int nblocks_stream_k = efficiency_loss_percent <= max_efficiency_loss_percent
++            int nblocks_stream_k = efficiency_loss_percent <= max_efficiency_loss_percent
+                 ? nblocks_stream_k_rounded
+                 : nblocks_stream_k_raw;
++#ifdef GGML_USE_HIP
++            nblocks_stream_k = ggml_cuda_fattn_kv_split_experiment(cc, KQV, ncols1, ncols2,
++                    nblocks_stream_k, max_blocks, ntiles_dst, ntiles_KV, nwarps, nbytes_shared, nbatch_fa);
++#endif
+ 
+             blocks_num.x = nblocks_stream_k;
+         }
+diff --git a/ggml/src/ggml-cuda/fattn.cu b/ggml/src/ggml-cuda/fattn.cu
+index 1515572..acaf4ae 100644
+--- a/ggml/src/ggml-cuda/fattn.cu
++++ b/ggml/src/ggml-cuda/fattn.cu
+@@ -5,6 +5,51 @@
+ #include "fattn-vec.cuh"
+ #include "fattn.cuh"
+ 
++#include <atomic>
++#include <cinttypes>
++#include <cstdlib>
++#include <cstring>
++#include <string>
++
++#ifdef GGML_USE_HIP
++int ggml_cuda_fattn_kv_split_experiment(int cc, const ggml_tensor * dst, int ncols1, int ncols2,
++        int normal_blocks, int max_blocks, int ntiles_dst, int ntiles_kv, int nwarps, size_t shared_bytes, int nbatch_fa) {
++    const ggml_tensor * Q = dst->src[0];
++    const ggml_tensor * K = dst->src[1];
++    const ggml_tensor * V = dst->src[2];
++    if (cc != GGML_CUDA_CC_OFFSET_AMD + 0x1152 || ncols1 != 4 || ncols2 != 8 ||
++        Q->type != GGML_TYPE_F32 || K->type != GGML_TYPE_F16 || V->type != GGML_TYPE_F16 ||
++        Q->ne[0] != 256 || V->ne[0] != 256 || Q->ne[1] != 3 || Q->ne[2] != 16 ||
++        Q->ne[3] != 1 || K->ne[2] != 2 || V->ne[2] != 2 || K->ne[3] != 1 || V->ne[3] != 1 ||
++        K->ne[1] < 100000 || K->ne[1] % FATTN_KQ_STRIDE != 0 || V->ne[1] != K->ne[1] ||
++        !dst->src[3] || dst->src[4] || ggml_get_op_params_f32(dst, 1) != 0.0f || ggml_get_op_params_f32(dst, 2) != 0.0f) {
++        return normal_blocks;
++    }
++    const char * value = std::getenv("GGML_HIP_FA_KV_SPLIT");
++    const std::string mode = value ? value : "auto";
++    int blocks = normal_blocks;
++    if (mode == "half") {
++        blocks = std::max(ntiles_dst, normal_blocks/2);
++    } else if (mode == "double") {
++        blocks = 2*normal_blocks;
++    } else if (mode == "quad") {
++        blocks = 4*normal_blocks;
++    } else if (mode != "auto") {
++        GGML_ABORT("invalid GGML_HIP_FA_KV_SPLIT mode");
++    }
++    blocks = std::min(blocks, ntiles_dst*ntiles_kv);
++    if (mode != "auto") {
++        blocks = std::max(ntiles_dst, blocks/ntiles_dst*ntiles_dst);
++    }
++    static std::atomic<bool> logged{false};
++    if (!logged.exchange(true)) {
++        fprintf(stderr, "HIP_FA_KV_SPLIT mode=%s blocks=%d normal=%d resident=%d tiles=%d kv_tiles=%d warps=%d shared=%zu kv_batch=%d\n",
++                mode.c_str(), blocks, normal_blocks, max_blocks, ntiles_dst, ntiles_kv, nwarps, shared_bytes, nbatch_fa);
++    }
++    return blocks;
++}
++#endif
++
+ #if !defined(GGML_USE_HIP) && !defined(GGML_USE_MUSA)
+ // one list per group of ncols1 queries: a column is selected if any query of the group can see it
+ template <int ncols1, bool oob>
+@@ -332,6 +377,37 @@ static void ggml_cuda_flash_attn_ext_mma_f16(ggml_backend_cuda_context & ctx, gg
+         } break;
+         case 256:
+             GGML_ASSERT(V->ne[0] == 256);
++#if defined(GGML_USE_HIP)
++            if (cc == GGML_CUDA_CC_OFFSET_AMD + 0x1152 && Q->type == GGML_TYPE_F32 &&
++                K->type == GGML_TYPE_F16 && V->type == GGML_TYPE_F16 &&
++                Q->ne[1] == 3 && Q->ne[2] == 16 && Q->ne[3] == 1 &&
++                K->ne[1] >= 100000 && K->ne[1] % FATTN_KQ_STRIDE == 0 &&
++                K->ne[2] == 2 && K->ne[3] == 1 && V->ne[1] == K->ne[1] &&
++                V->ne[2] == 2 && V->ne[3] == 1 && mask && !dst->src[4] &&
++                ggml_get_op_params_f32(dst, 1) == 0.0f && ggml_get_op_params_f32(dst, 2) == 0.0f) {
++                const char * tile = std::getenv("GGML_HIP_FA_MMA_TILE");
++                bool aligned = true;
++                for (const ggml_tensor * tensor : {Q, K, V, mask}) {
++                    for (size_t i = 1; i < GGML_MAX_DIMS; ++i) {
++                        aligned = aligned && tensor->nb[i] % 16 == 0;
++                    }
++                }
++                const bool small = tile && std::strcmp(tile, "16") == 0;
++                const bool large = tile && std::strcmp(tile, "64") == 0;
++                static std::atomic<bool> logged{false};
++                if (aligned && !logged.exchange(true)) {
++                    fprintf(stderr, "HIP_FA_MMA_TILE columns=%d q=3 kv=%" PRId64 "\n", small ? 16 : large ? 64 : 32, K->ne[1]);
++                }
++                if (aligned && small) {
++                    ggml_cuda_flash_attn_ext_mma_f16_case<256, 256, 2, 8>(ctx, dst);
++                    break;
++                }
++                if (aligned && large) {
++                    ggml_cuda_flash_attn_ext_mma_f16_case<256, 256, 8, 8>(ctx, dst);
++                    break;
++                }
++            }
++#endif
+             ggml_cuda_flash_attn_ext_mma_f16_switch_ncols2<256, 256>(ctx, dst);
+             break;
+         case 320:
+@@ -756,7 +832,45 @@ size_t ggml_cuda_flash_attn_ext_get_alloc_size(int device, const ggml_tensor * d
+ 
+ void ggml_cuda_flash_attn_ext(ggml_backend_cuda_context & ctx, ggml_tensor * dst) {
+     ggml_cuda_set_device(ctx.device);
+-    switch (ggml_cuda_get_best_fattn_kernel(ggml_cuda_get_device(), dst)) {
++    best_fattn_kernel kernel = ggml_cuda_get_best_fattn_kernel(ggml_cuda_get_device(), dst);
++#ifdef GGML_USE_HIP
++    const ggml_tensor * q = dst->src[0];
++    const ggml_tensor * k = dst->src[1];
++    const ggml_tensor * v = dst->src[2];
++    float max_bias = 0.0f;
++    float softcap = 0.0f;
++    memcpy(&max_bias, (const float *) dst->op_params + 1, sizeof(float));
++    memcpy(&softcap, (const float *) dst->op_params + 2, sizeof(float));
++    const bool eligible = ggml_cuda_info().devices[ctx.device].cc == GGML_CUDA_CC_OFFSET_AMD + 0x1152 &&
++        kernel != BEST_FATTN_KERNEL_NONE && q->type == GGML_TYPE_F32 &&
++        k->type == GGML_TYPE_F16 && v->type == GGML_TYPE_F16 &&
++        q->ne[0] == 256 && k->ne[0] == 256 && v->ne[0] == 256 &&
++        q->ne[1] == 3 && q->ne[2] == 16 && k->ne[2] == 2 && v->ne[2] == 2 &&
++        q->ne[3] == 1 && k->ne[3] == 1 && v->ne[3] == 1 &&
++        k->ne[1] >= 100000 && k->ne[1] % FATTN_KQ_STRIDE == 0 && v->ne[1] == k->ne[1] &&
++        dst->src[3] && !dst->src[4] && max_bias == 0.0f && softcap == 0.0f;
++    if (eligible) {
++        static const std::string mode = [] {
++            const char * value = std::getenv("GGML_HIP_FA_EXPERIMENT");
++            return std::string(value ? value : "auto");
++        }();
++        if (mode == "tile") {
++            kernel = BEST_FATTN_KERNEL_TILE;
++        } else if (mode == "vec") {
++            kernel = BEST_FATTN_KERNEL_VEC;
++        } else if (mode == "mma") {
++            kernel = BEST_FATTN_KERNEL_MMA_F16;
++        } else if (mode != "auto") {
++            GGML_ABORT("invalid GGML_HIP_FA_EXPERIMENT mode");
++        }
++        static std::atomic<bool> reported{false};
++        if (!reported.exchange(true)) {
++            fprintf(stderr, "HIP_FA_EXPERIMENT mode=%s kernel=%d q=3 kv=%" PRId64 " heads=16 kv_heads=2 dim=256\n",
++                    mode.c_str(), (int) kernel, k->ne[1]);
++        }
++    }
++#endif
++    switch (kernel) {
+         case BEST_FATTN_KERNEL_NONE:
+             GGML_ABORT("fatal error");
+         case BEST_FATTN_KERNEL_TILE:
+diff --git a/tests/test-backend-ops.cpp b/tests/test-backend-ops.cpp
+index fe3a67c..1539a72 100644
+--- a/tests/test-backend-ops.cpp
++++ b/tests/test-backend-ops.cpp
+@@ -1541,6 +1541,36 @@ struct test_case {
+ 
+             std::vector<float> f1 = tensor_to_float(t1);
+             std::vector<float> f2 = tensor_to_float(t2);
++            const char * dump_dir = std::getenv("LLAMA_HIP_ATTENTION_DUMP");
++            if (dump_dir && t1->op == GGML_OP_FLASH_ATTN_EXT && t1->src[0]->ne[1] == 3 && t1->src[1]->ne[1] >= 100000) {
++                static std::atomic<bool> dumped{false};
++                if (!dumped.exchange(true)) {
++                    std::ofstream metadata(std::string(dump_dir) + "/metadata.txt");
++                    GGML_ASSERT(metadata.good());
++                    const auto write_values = [&](const char * label, const ggml_tensor * tensor, const std::vector<float> & values) {
++                        std::ofstream file(std::string(dump_dir) + "/" + label + ".bin", std::ios::binary);
++                        file.write((const char *) values.data(), values.size() * sizeof(float));
++                        GGML_ASSERT(file.good());
++                        metadata << label;
++                        for (int d = 0; d < 4; ++d) {
++                            metadata << ' ' << tensor->ne[d];
++                        }
++                        metadata << '\n';
++                    };
++                    const char * labels[] = {"q", "k", "v", "mask"};
++                    for (int s = 0; s < 4; ++s) {
++                        const auto input1 = tensor_to_float(t1->src[s]);
++                        const auto input2 = tensor_to_float(t2->src[s]);
++                        write_values(labels[s], t1->src[s], input1);
++                        metadata << "input_equal " << labels[s] << ' ' << (input1 == input2) << '\n';
++                    }
++                    write_values("gpu", t1, f1);
++                    write_values("cpu", t2, f2);
++                    float scale = 0.0f;
++                    memcpy(&scale, t1->op_params, sizeof(float));
++                    metadata << "scale " << scale << '\n';
++                }
++            }
+ 
+             for (size_t i = 0; i < f1.size(); i++) {
+                 // check for nans
+@@ -9991,7 +10021,29 @@ static const ggml_type other_types[] = {
+ #endif
+ 
+ // Test cases for evaluation: should try to cover edge cases while using small input sizes to keep the runtime low
++static std::vector<std::unique_ptr<test_case>> make_hip_attention_probe_cases() {
++    std::vector<std::unique_ptr<test_case>> test_cases;
++    if (const char * variant = std::getenv("LLAMA_HIP_ATTENTION_VARIANT")) {
++        const std::string value(variant);
++        GGML_ASSERT(value == "strided100k" || value == "strided160k" || value == "contiguous160k");
++        const int64_t kv = value == "strided100k" ? 103424 : 160000;
++        const std::array<int32_t, 4> permute = value == "contiguous160k" ?
++            std::array<int32_t, 4>{0, 1, 2, 3} : std::array<int32_t, 4>{0, 2, 1, 3};
++        test_cases.emplace_back(new test_flash_attn_ext(256, 256, 2, {8, 1}, kv, 3,
++                true, false, 0.0f, 0.0f, GGML_PREC_F32, GGML_TYPE_F16, GGML_TYPE_F16, permute));
++        return test_cases;
++    }
++    for (int64_t queries : {1, 3}) {
++        test_cases.emplace_back(new test_flash_attn_ext(256, 256, 2, {8, 1}, 103424, queries));
++    }
++    test_cases.emplace_back(new test_flash_attn_ext_large_logits(256, 256, 2, {8, 1}, 103424, 3));
++    return test_cases;
++}
++
+ static std::vector<std::unique_ptr<test_case>> make_test_cases_eval() {
++    if (std::getenv("LLAMA_HIP_ATTENTION_PROBE")) {
++        return make_hip_attention_probe_cases();
++    }
+     std::vector<std::unique_ptr<test_case>> test_cases;
+     std::default_random_engine rng(0);
+ 
+@@ -12506,6 +12558,9 @@ static std::vector<std::unique_ptr<test_case>> make_test_cases_eval() {
+ 
+ // Test cases for performance evaluation: should be representative of real-world use cases
+ static std::vector<std::unique_ptr<test_case>> make_test_cases_perf() {
++    if (std::getenv("LLAMA_HIP_ATTENTION_PROBE")) {
++        return make_hip_attention_probe_cases();
++    }
+     std::vector<std::unique_ptr<test_case>> test_cases;
+ 
+     // SWIGLU at a 27B-class FFN width, fused [gate|up] vs split operands

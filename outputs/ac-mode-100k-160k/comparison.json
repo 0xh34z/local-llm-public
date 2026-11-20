@@ -1,0 +1,108 @@
+[
+  {
+    "input_tokens": 103220,
+    "token_hash_and_draft_work_matched": true,
+    "modes": {
+      "00000000-0000-0000-0000-000000000000": {
+        "pooled_tps": 17.434864457432315,
+        "request_tps": [
+          17.419273791158755,
+          17.450483056744318
+        ],
+        "gpu_sensor_samples": 2,
+        "gpu_clock_mhz": {
+          "min": 1811.0,
+          "mean": 2239.5,
+          "max": 2668.0
+        },
+        "gpu_temperature_c": {
+          "min": 64.0,
+          "mean": 67.0,
+          "max": 70.0
+        },
+        "gpu_power_w": {
+          "min": 24.0,
+          "mean": 24.5,
+          "max": 25.0
+        }
+      },
+      "ded574b5-45a0-4f42-8737-46345c09c238": {
+        "pooled_tps": 18.02809094712343,
+        "request_tps": [
+          18.163041288011776,
+          17.895131162890188
+        ],
+        "gpu_sensor_samples": 2,
+        "gpu_clock_mhz": {
+          "min": 2982.0,
+          "mean": 2985.5,
+          "max": 2989.0
+        },
+        "gpu_temperature_c": {
+          "min": 80.0,
+          "mean": 81.5,
+          "max": 83.0
+        },
+        "gpu_power_w": {
+          "min": 35.0,
+          "mean": 35.5,
+          "max": 36.0
+        }
+      }
+    },
+    "best_performance_change_pct": 3.4025299774454343
+  },
+  {
+    "input_tokens": 160537,
+    "token_hash_and_draft_work_matched": true,
+    "modes": {
+      "00000000-0000-0000-0000-000000000000": {
+        "pooled_tps": 14.26174815699064,
+        "request_tps": [
+          14.302072331020174,
+          14.221650728750847
+        ],
+        "gpu_sensor_samples": 2,
+        "gpu_clock_mhz": {
+          "min": 2669.0,
+          "mean": 2688.0,
+          "max": 2707.0
+        },
+        "gpu_temperature_c": {
+          "min": 70.0,
+          "mean": 71.0,
+          "max": 72.0
+        },
+        "gpu_power_w": {
+          "min": 24.0,
+          "mean": 24.5,
+          "max": 25.0
+        }
+      },
+      "ded574b5-45a0-4f42-8737-46345c09c238": {
+        "pooled_tps": 14.814344456688712,
+        "request_tps": [
+          14.941823570463004,
+          14.689022167923405
+        ],
+        "gpu_sensor_samples": 2,
+        "gpu_clock_mhz": {
+          "min": 2962.0,
+          "mean": 2977.0,
+          "max": 2992.0
+        },
+        "gpu_temperature_c": {
+          "min": 77.0,
+          "mean": 80.0,
+          "max": 83.0
+        },
+        "gpu_power_w": {
+          "min": 34.0,
+          "mean": 34.0,
+          "max": 34.0
+        }
+      }
+    },
+    "best_performance_change_pct": 3.874674364006414
+  }
+]

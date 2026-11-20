@@ -1,0 +1,14 @@
+{
+  "order": [
+    "auto",
+    "8",
+    "auto"
+  ],
+  "cases": {
+    "103k": "kv-split-100k-results-verified\\case-02-double\\repeat-1-request.json",
+    "160k": "populated-160k-kv-split-results\\case-02-double\\measured-request.json"
+  },
+  "hip_sha256": "96756e265af387b03b2bd8be6a8609168c103f0e91f40f5a7921bfce72c57e0c",
+  "screen": "outputs\\vocab-projection-screen-2",
+  "kv_split": "double"
+}

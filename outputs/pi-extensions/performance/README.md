@@ -11,10 +11,10 @@ Perf | TTFT 0.75s | 17.6 tok/s srv | 80 out | 5.0s done
 Start Pi with the extension, while running your usual local inference server:
 
 ```powershell
-pi --extension "C:\Users\kasper\Documents\GitHub\local-llm\outputs\pi-extensions\performance\index.js"
+pi --extension ".\outputs\pi-extensions\performance\index.js"
 ```
 
-Installed for automatic loading on 2026-10-29 at `C:\Users\kasper\.pi\agent\extensions\local-llm-performance\` (`index.js` and `performance.mjs`). Pi's installed loader discovered exactly one copy with no errors, and the installed files match these repository sources. Restart Pi or use `/reload` in an existing session. No settings entry or explicit `--extension` argument is needed for this installation; avoid adding a second copy through those mechanisms. Live terminal rendering remains unverified.
+Installed for automatic loading on 2026-10-29 at `~\.pi\agent\extensions\local-llm-performance\` (`index.js` and `performance.mjs`). Pi's installed loader discovered exactly one copy with no errors, and the installed files match these repository sources. Restart Pi or use `/reload` in an existing session. No settings entry or explicit `--extension` argument is needed for this installation; avoid adding a second copy through those mechanisms. Live terminal rendering remains unverified.
 
 For a different profile, either copy those two files into its `agent/extensions/local-llm-performance/` folder or append the repository entry-point path to the existing `extensions` array in its settings. `settings-merge.json` supplies the latter fragment; use only one loading method.
 

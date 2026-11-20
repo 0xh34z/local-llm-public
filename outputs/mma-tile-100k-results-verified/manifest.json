@@ -1,0 +1,156 @@
+{
+  "order": [
+    "auto",
+    "16",
+    "auto",
+    "64",
+    "auto"
+  ],
+  "primary_temperature": 0.6,
+  "primary_repetitions": 3,
+  "primary_output_tokens": 256,
+  "greedy_repetitions": 1,
+  "warmup_output_tokens": 64,
+  "model_build": {
+    "model_path": "<models>\\Qwen3.6-35B-A3B-MTP-UD-Q4_K_XL.gguf",
+    "build_info": "b11888-48c9f08b7",
+    "n_ctx": 163840
+  },
+  "context": 163840,
+  "batch": 2048,
+  "microbatch": 512,
+  "threads": 8,
+  "mtp": 2,
+  "kv": "f16",
+  "override": "gfx1152, Q3 D256 H16, KV heads2 F16, >=100K padded KV; other shapes unchanged",
+  "normal_execution": "Profiling disabled; graph replay remains enabled",
+  "oracles": {
+    "16": {
+      "numpy_version": "2.3.5",
+      "inputs_equal": {
+        "q": true,
+        "k": true,
+        "v": true,
+        "mask": true
+      },
+      "shapes": {
+        "q": [
+          256,
+          3,
+          16,
+          1
+        ],
+        "k": [
+          256,
+          103424,
+          2,
+          1
+        ],
+        "v": [
+          256,
+          103424,
+          2,
+          1
+        ],
+        "mask": [
+          103424,
+          3,
+          1,
+          1
+        ],
+        "gpu": [
+          256,
+          16,
+          3,
+          1
+        ],
+        "cpu": [
+          256,
+          16,
+          3,
+          1
+        ]
+      },
+      "scale": 0.0625,
+      "reference_rms": 0.002249160297009539,
+      "backends": {
+        "gpu": {
+          "nmse_vs_float64": 0.00017376999791711116,
+          "max_absolute_error": 0.00015679094064810235,
+          "relative_rms_error": 0.013182184868871745
+        },
+        "cpu": {
+          "nmse_vs_float64": 0.002281115995988823,
+          "max_absolute_error": 0.0008488670531161396,
+          "relative_rms_error": 0.04776103009765203
+        }
+      },
+      "gpu_cpu_nmse_gpu_denominator": 0.002442586816904952,
+      "scope": "One synthetic regular-logit Q3 case, F16 K/V storage, F32 Q storage, F64 dot/softmax/value reduction; no sinks, ALiBi or softcap"
+    },
+    "64": {
+      "numpy_version": "2.3.5",
+      "inputs_equal": {
+        "q": true,
+        "k": true,
+        "v": true,
+        "mask": true
+      },
+      "shapes": {
+        "q": [
+          256,
+          3,
+          16,
+          1
+        ],
+        "k": [
+          256,
+          103424,
+          2,
+          1
+        ],
+        "v": [
+          256,
+          103424,
+          2,
+          1
+        ],
+        "mask": [
+          103424,
+          3,
+          1,
+          1
+        ],
+        "gpu": [
+          256,
+          16,
+          3,
+          1
+        ],
+        "cpu": [
+          256,
+          16,
+          3,
+          1
+        ]
+      },
+      "scale": 0.0625,
+      "reference_rms": 0.002244174524077595,
+      "backends": {
+        "gpu": {
+          "nmse_vs_float64": 0.0002595285968978021,
+          "max_absolute_error": 0.00020715359698720865,
+          "relative_rms_error": 0.016109891275170114
+        },
+        "cpu": {
+          "nmse_vs_float64": 0.002257868438852196,
+          "max_absolute_error": 0.0010430379951282586,
+          "relative_rms_error": 0.047517033144465114
+        }
+      },
+      "gpu_cpu_nmse_gpu_denominator": 0.00251519040418009,
+      "scope": "One synthetic regular-logit Q3 case, F16 K/V storage, F32 Q storage, F64 dot/softmax/value reduction; no sinks, ALiBi or softcap"
+    }
+  },
+  "backend_sha256": "e0dadc941bfb6dd511f89e9382df0c89752ea4fab025f56bd7dfae723c2d26c8"
+}

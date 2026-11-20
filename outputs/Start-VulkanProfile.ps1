@@ -1,6 +1,6 @@
 $ErrorActionPreference = 'Stop'
 $profileExe = Join-Path (Split-Path -Parent $PSScriptRoot) 'work\backends\llama-b11888-bin-win-vulkan-x64\llama-server.exe'
-$profileModel = 'C:\Users\kasper\Desktop\Models\Qwen3.6-35B-A3B-MTP-UD-Q4_K_XL.gguf'
+$profileModel = $(if ($env:LLM_MODEL_PATH) { $env:LLM_MODEL_PATH } else { Join-Path $HOME 'Models\Qwen3.6-35B-A3B-MTP-UD-Q4_K_XL.gguf' })
 $profileLog = Join-Path $PSScriptRoot 'vulkan-profile.log'
 $profileVariables = @{
     GGML_VK_PERF_LOGGER = '1'

@@ -1,0 +1,350 @@
+{
+  "hip_sha256": "fe56b1843c1fad6993455bfc46ea7b7c2f58581a49a7f2a9bae1b406e5e8886f",
+  "executable_sha256": "488401b0aca42579dac4540e99edbe3f4253f7f304cd920804598ba286692672",
+  "numerical": [
+    {
+      "variant": "contiguous100k",
+      "threads": 256,
+      "gpu_nmse": 7.390785403335457e-05,
+      "qualified": true,
+      "cpu_nmse": 0.002280883727648169,
+      "upstream_exit": 1,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=1616 warps=8 shared=34816 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "contiguous100k",
+      "threads": 128,
+      "gpu_nmse": 0.00013407883115741366,
+      "qualified": true,
+      "cpu_nmse": 0.0021767624016681654,
+      "upstream_exit": 1,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=1616 warps=4 shared=34368 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided100k",
+      "threads": 256,
+      "gpu_nmse": 6.496003772039656e-05,
+      "qualified": true,
+      "cpu_nmse": 0.002142253947413734,
+      "upstream_exit": 1,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=1616 warps=8 shared=34816 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided100k",
+      "threads": 128,
+      "gpu_nmse": 0.00015142452480386987,
+      "qualified": true,
+      "cpu_nmse": 0.002396056338126308,
+      "upstream_exit": 1,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=1616 warps=4 shared=34368 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "contiguous160k",
+      "threads": 256,
+      "gpu_nmse": 0.00010787433721576852,
+      "qualified": true,
+      "cpu_nmse": 0.0033710810732169106,
+      "upstream_exit": 1,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=2500 warps=8 shared=34816 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "contiguous160k",
+      "threads": 128,
+      "gpu_nmse": 0.00020256881535573855,
+      "qualified": true,
+      "cpu_nmse": 0.003291090108552449,
+      "upstream_exit": 1,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=2500 warps=4 shared=34368 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided160k",
+      "threads": 256,
+      "gpu_nmse": 0.00011113716023135309,
+      "qualified": true,
+      "cpu_nmse": 0.0035083495477102747,
+      "upstream_exit": 1,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=2500 warps=8 shared=34816 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided160k",
+      "threads": 128,
+      "gpu_nmse": 0.00020513928795949296,
+      "qualified": true,
+      "cpu_nmse": 0.003600468563669018,
+      "upstream_exit": 1,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=2500 warps=4 shared=34368 kv_batch=64"
+      ]
+    }
+  ],
+  "performance": [
+    {
+      "variant": "strided100k",
+      "position": 1,
+      "threads": 256,
+      "us": 3479.02,
+      "runs": 300,
+      "started_unix": 1795043876.285471,
+      "ended_unix": 1795043878.2814841,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=1616 warps=8 shared=34816 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided100k",
+      "position": 2,
+      "threads": 128,
+      "us": 5263.19,
+      "runs": 200,
+      "started_unix": 1795043878.283092,
+      "ended_unix": 1795043880.228541,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=1616 warps=4 shared=34368 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided100k",
+      "position": 3,
+      "threads": 256,
+      "us": 3544.29,
+      "runs": 300,
+      "started_unix": 1795043880.2324555,
+      "ended_unix": 1795043882.2134442,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=1616 warps=8 shared=34816 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided100k",
+      "position": 4,
+      "threads": 128,
+      "us": 5303.88,
+      "runs": 200,
+      "started_unix": 1795043882.2173214,
+      "ended_unix": 1795043884.262141,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=1616 warps=4 shared=34368 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided100k",
+      "position": 5,
+      "threads": 256,
+      "us": 3499.24,
+      "runs": 300,
+      "started_unix": 1795043884.2659748,
+      "ended_unix": 1795043886.2390828,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=1616 warps=8 shared=34816 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided100k",
+      "position": 6,
+      "threads": 128,
+      "us": 5276.7,
+      "runs": 200,
+      "started_unix": 1795043886.2405243,
+      "ended_unix": 1795043888.204252,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=1616 warps=4 shared=34368 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided100k",
+      "position": 7,
+      "threads": 256,
+      "us": 3559.13,
+      "runs": 300,
+      "started_unix": 1795043888.2056363,
+      "ended_unix": 1795043890.1888728,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=1616 warps=8 shared=34816 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided100k",
+      "position": 8,
+      "threads": 128,
+      "us": 5690.95,
+      "runs": 180,
+      "started_unix": 1795043890.1901183,
+      "ended_unix": 1795043892.192747,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=1616 warps=4 shared=34368 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided100k",
+      "position": 9,
+      "threads": 256,
+      "us": 3615.44,
+      "runs": 280,
+      "started_unix": 1795043892.1941538,
+      "ended_unix": 1795043894.2384279,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=1616 warps=8 shared=34816 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided160k",
+      "position": 1,
+      "threads": 256,
+      "us": 5536.42,
+      "runs": 182,
+      "started_unix": 1795043894.2400692,
+      "ended_unix": 1795043896.6383765,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=2500 warps=8 shared=34816 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided160k",
+      "position": 2,
+      "threads": 128,
+      "us": 8236.1,
+      "runs": 130,
+      "started_unix": 1795043896.64243,
+      "ended_unix": 1795043899.1035182,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=2500 warps=4 shared=34368 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided160k",
+      "position": 3,
+      "threads": 256,
+      "us": 5541.27,
+      "runs": 182,
+      "started_unix": 1795043899.1053803,
+      "ended_unix": 1795043901.5033188,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=2500 warps=8 shared=34816 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided160k",
+      "position": 4,
+      "threads": 128,
+      "us": 8249.99,
+      "runs": 130,
+      "started_unix": 1795043901.5045474,
+      "ended_unix": 1795043903.7999585,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=2500 warps=4 shared=34368 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided160k",
+      "position": 5,
+      "threads": 256,
+      "us": 5380.77,
+      "runs": 195,
+      "started_unix": 1795043903.8005936,
+      "ended_unix": 1795043906.1158795,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=2500 warps=8 shared=34816 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided160k",
+      "position": 6,
+      "threads": 128,
+      "us": 8436.99,
+      "runs": 130,
+      "started_unix": 1795043906.1197312,
+      "ended_unix": 1795043908.4512424,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=2500 warps=4 shared=34368 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided160k",
+      "position": 7,
+      "threads": 256,
+      "us": 5559.24,
+      "runs": 182,
+      "started_unix": 1795043908.453062,
+      "ended_unix": 1795043910.823078,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=2500 warps=8 shared=34816 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided160k",
+      "position": 8,
+      "threads": 128,
+      "us": 8131.74,
+      "runs": 130,
+      "started_unix": 1795043910.8249838,
+      "ended_unix": 1795043913.149298,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=2500 warps=4 shared=34368 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided160k",
+      "position": 9,
+      "threads": 256,
+      "us": 5422.42,
+      "runs": 195,
+      "started_unix": 1795043913.151149,
+      "ended_unix": 1795043915.4356775,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=2500 warps=8 shared=34816 kv_batch=64"
+      ]
+    }
+  ],
+  "orders": [
+    256,
+    128,
+    256,
+    128,
+    256,
+    128,
+    256,
+    128,
+    256
+  ],
+  "dumps": "<repo>\\work\\workgroup-screen-fixtures",
+  "environment": {
+    "256": {
+      "GGML_HIP_FA_KV_SPLIT": "double",
+      "GGML_HIP_FA_EXPERIMENT": "auto",
+      "GGML_HIP_FA_MMA_TILE": "auto",
+      "GGML_HIP_OP_PROFILE": "0",
+      "GGML_HIP_FA_WORKGROUP": "256"
+    },
+    "128": {
+      "GGML_HIP_FA_KV_SPLIT": "double",
+      "GGML_HIP_FA_EXPERIMENT": "auto",
+      "GGML_HIP_FA_MMA_TILE": "auto",
+      "GGML_HIP_OP_PROFILE": "0",
+      "GGML_HIP_FA_WORKGROUP": "128"
+    }
+  },
+  "median_us": {
+    "strided100k": {
+      "256": 3544.29,
+      "128": 5290.29
+    },
+    "strided160k": {
+      "256": 5536.42,
+      "128": 8243.045
+    }
+  }
+}

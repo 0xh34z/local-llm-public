@@ -1,0 +1,27 @@
+{
+  "order": [
+    "auto",
+    "double",
+    "auto"
+  ],
+  "context": 163840,
+  "cached_prefix": 103194,
+  "tasks": {
+    "code": [
+      "Implement a bounded thread-safe LRU cache in Python with get and put operations. Specify capacity validation and missing-key behavior, and include tests for replacement, recency updates, empty inputs and concurrent access. Explain the locking invariant.",
+      false
+    ],
+    "reasoning": [
+      "A shared balance starts at 100. Two threads each read it, subtract 10 locally, and write the local result back, with each read and write atomic but the pair unprotected. Enumerate all distinct final balances and justify the interleavings. Generalize the possible balances to N threads, then explain the minimal correct locking change.",
+      true
+    ]
+  },
+  "output_tokens_per_task": 512,
+  "temperature": 0.6,
+  "precision": "F16 K/V, unchanged Q4 weights",
+  "mtp": 2,
+  "batch": 2048,
+  "microbatch": 512,
+  "threads": 8,
+  "scope": "Synthetic throughput across two additional prompts; forced output, not quality or tool-call evaluation"
+}

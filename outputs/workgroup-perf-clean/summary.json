@@ -1,0 +1,259 @@
+{
+  "qualification": "..\\workgroup-screen",
+  "hip_sha256": "fe56b1843c1fad6993455bfc46ea7b7c2f58581a49a7f2a9bae1b406e5e8886f",
+  "performance": [
+    {
+      "variant": "strided100k",
+      "position": 1,
+      "threads": 256,
+      "us": 3652.22,
+      "runs": 280,
+      "started_unix": 1795044297.6873317,
+      "ended_unix": 1795044299.6846786,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=1616 warps=8 shared=34816 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided100k",
+      "position": 2,
+      "threads": 128,
+      "us": 5581.82,
+      "runs": 180,
+      "started_unix": 1795044299.6870286,
+      "ended_unix": 1795044301.6962507,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=1616 warps=4 shared=34368 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided100k",
+      "position": 3,
+      "threads": 256,
+      "us": 3966.58,
+      "runs": 260,
+      "started_unix": 1795044301.6983786,
+      "ended_unix": 1795044303.6934962,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=1616 warps=8 shared=34816 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided100k",
+      "position": 4,
+      "threads": 128,
+      "us": 5738.21,
+      "runs": 180,
+      "started_unix": 1795044303.697742,
+      "ended_unix": 1795044305.6901865,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=1616 warps=4 shared=34368 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided100k",
+      "position": 5,
+      "threads": 256,
+      "us": 3776.73,
+      "runs": 280,
+      "started_unix": 1795044305.6913555,
+      "ended_unix": 1795044307.7803788,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=1616 warps=8 shared=34816 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided100k",
+      "position": 6,
+      "threads": 128,
+      "us": 5518.3,
+      "runs": 200,
+      "started_unix": 1795044307.7816653,
+      "ended_unix": 1795044309.8198395,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=1616 warps=4 shared=34368 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided100k",
+      "position": 7,
+      "threads": 256,
+      "us": 3759.16,
+      "runs": 280,
+      "started_unix": 1795044309.8215892,
+      "ended_unix": 1795044311.8338735,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=1616 warps=8 shared=34816 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided100k",
+      "position": 8,
+      "threads": 128,
+      "us": 5510.15,
+      "runs": 200,
+      "started_unix": 1795044311.8357246,
+      "ended_unix": 1795044313.896827,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=1616 warps=4 shared=34368 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided100k",
+      "position": 9,
+      "threads": 256,
+      "us": 3750.22,
+      "runs": 280,
+      "started_unix": 1795044313.8987095,
+      "ended_unix": 1795044315.9081893,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=1616 warps=8 shared=34816 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided160k",
+      "position": 1,
+      "threads": 256,
+      "us": 5726.83,
+      "runs": 182,
+      "started_unix": 1795044315.9092155,
+      "ended_unix": 1795044318.2811108,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=2500 warps=8 shared=34816 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided160k",
+      "position": 2,
+      "threads": 128,
+      "us": 8641.15,
+      "runs": 117,
+      "started_unix": 1795044318.2849412,
+      "ended_unix": 1795044320.654847,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=2500 warps=4 shared=34368 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided160k",
+      "position": 3,
+      "threads": 256,
+      "us": 5744.96,
+      "runs": 182,
+      "started_unix": 1795044320.656077,
+      "ended_unix": 1795044323.0456955,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=2500 warps=8 shared=34816 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided160k",
+      "position": 4,
+      "threads": 128,
+      "us": 8431.25,
+      "runs": 130,
+      "started_unix": 1795044323.0473194,
+      "ended_unix": 1795044325.4407623,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=2500 warps=4 shared=34368 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided160k",
+      "position": 5,
+      "threads": 256,
+      "us": 5720.3,
+      "runs": 182,
+      "started_unix": 1795044325.4447417,
+      "ended_unix": 1795044327.7991838,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=2500 warps=8 shared=34816 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided160k",
+      "position": 6,
+      "threads": 128,
+      "us": 8435.53,
+      "runs": 130,
+      "started_unix": 1795044327.8031836,
+      "ended_unix": 1795044330.2119696,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=2500 warps=4 shared=34368 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided160k",
+      "position": 7,
+      "threads": 256,
+      "us": 5735.65,
+      "runs": 182,
+      "started_unix": 1795044330.2138402,
+      "ended_unix": 1795044332.5948024,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=2500 warps=8 shared=34816 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided160k",
+      "position": 8,
+      "threads": 128,
+      "us": 8434.27,
+      "runs": 130,
+      "started_unix": 1795044332.5984535,
+      "ended_unix": 1795044334.98892,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=2500 warps=4 shared=34368 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided160k",
+      "position": 9,
+      "threads": 256,
+      "us": 5805.89,
+      "runs": 182,
+      "started_unix": 1795044334.9898992,
+      "ended_unix": 1795044337.3429244,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=2500 warps=8 shared=34816 kv_batch=64"
+      ]
+    }
+  ],
+  "orders": [
+    256,
+    128,
+    256,
+    128,
+    256,
+    128,
+    256,
+    128,
+    256
+  ],
+  "environment": {
+    "256": {
+      "GGML_HIP_FA_KV_SPLIT": "double",
+      "GGML_HIP_FA_EXPERIMENT": "auto",
+      "GGML_HIP_FA_MMA_TILE": "auto",
+      "GGML_HIP_OP_PROFILE": "0",
+      "GGML_HIP_FA_WORKGROUP": "256"
+    },
+    "128": {
+      "GGML_HIP_FA_KV_SPLIT": "double",
+      "GGML_HIP_FA_EXPERIMENT": "auto",
+      "GGML_HIP_FA_MMA_TILE": "auto",
+      "GGML_HIP_OP_PROFILE": "0",
+      "GGML_HIP_FA_WORKGROUP": "128"
+    }
+  },
+  "median_us": {
+    "strided100k": {
+      "256": 3759.16,
+      "128": 5550.0599999999995
+    },
+    "strided160k": {
+      "256": 5735.65,
+      "128": 8434.900000000001
+    }
+  }
+}

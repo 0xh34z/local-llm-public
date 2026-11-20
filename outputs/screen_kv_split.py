@@ -7,11 +7,12 @@ from pathlib import Path
 import re
 import statistics
 import subprocess
+import sys
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / 'outputs/kv-split-kernel-tests'
 BACKEND = ROOT / 'work/hip-kv-split-bin'
-NUMPY_PYTHON = Path('C:/Users/kasper/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe')
+NUMPY_PYTHON = Path(os.environ.get('NUMPY_PYTHON', sys.executable))
 
 
 def main():

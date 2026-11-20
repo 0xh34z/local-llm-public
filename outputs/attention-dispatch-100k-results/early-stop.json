@@ -1,0 +1,6 @@
+{
+  "Reason": "Severe vector regression; cancelled remaining vector repetitions after one complete 256-token measurement",
+  "CompletedVectorTPS": 1.9251848553060886,
+  "CompleteVectorOutputTokens": 256,
+  "UnfinishedRequestsExcluded": true
+}

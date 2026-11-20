@@ -1,5 +1,7 @@
 # MMA tile-column experiment: keep automatic selection
 
+> **Note:** This is the public copy of this report. Small summary files (summaries, samples, manifests) are included, with local paths replaced by placeholders such as `<repo>` and `<models>`. The full raw data (request/response dumps, server logs, generated text, build logs and test fixtures) is not public, so some links in this report do not resolve.
+
 Two further MMA configurations were built and tested on the Radeon 860M (gfx1152). Neither improved practical generation at the restored 103K prefix. Keep the normal ROCm backend, F16 K/V, MTP 2 and automatic attention dispatch. No experimental backend was installed as the production default.
 
 ## Measured results
@@ -24,7 +26,7 @@ The 15 TPS sustained floor remains unproven. These results do not establish that
 
 Base source: llama.cpp b11888, commit `48c9f08b7b25766324282b7605177e2f2be755bb`. ROCm 10 runtime, private gfx1152-only build, graph replay enabled, synchronized operation profiling disabled.
 
-Model: `C:\Users\kasper\Desktop\Models\Qwen3.6-35B-A3B-MTP-UD-Q4_K_XL.gguf`. Every request had 103220 input tokens, restored 103194 cached tokens, and processed 26 additional tokens. Allocation was 163840; output budget was 256. Configuration: ROCm0, F16 K/V, MTP 2, one slot, GPU layers 99, Flash Attention, Jinja, batch 2048, microbatch 512, eight main/draft/generation/batch threads, auto load mode, port 9931. Launch arguments and server properties are retained in each case directory.
+Model: `$env:LLM_MODEL_PATH (e.g. ~\Models\Qwen3.6-35B-A3B-MTP-UD-Q4_K_XL.gguf)`. Every request had 103220 input tokens, restored 103194 cached tokens, and processed 26 additional tokens. Allocation was 163840; output budget was 256. Configuration: ROCm0, F16 K/V, MTP 2, one slot, GPU layers 99, Flash Attention, Jinja, batch 2048, microbatch 512, eight main/draft/generation/batch threads, auto load mode, port 9931. Launch arguments and server properties are retained in each case directory.
 
 Sampling: temperature 0.6, top-p 0.95, top-k 20, min-p 0, seed 42, repetition penalty 1, presence penalty 0, ignore_eos enabled, completed empty thinking block. Greedy controls use temperature zero. Primary request SHA256 is `a84687703f85aa775ba0a36d59c4fb6072110775967518481bc5f43e87f11283`.
 

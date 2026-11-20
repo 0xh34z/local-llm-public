@@ -1,0 +1,350 @@
+{
+  "hip_sha256": "9bcb045e8c38f72b35ff32077d098d8a861eb37d9247c321e20fbeeceaeed140",
+  "executable_sha256": "488401b0aca42579dac4540e99edbe3f4253f7f304cd920804598ba286692672",
+  "numerical": [
+    {
+      "variant": "contiguous100k",
+      "query_storage": "registers",
+      "gpu_nmse": 6.659954264434887e-05,
+      "qualified": true,
+      "cpu_nmse": 0.0022159152004081555,
+      "upstream_exit": 1,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=1616 warps=8 shared=34816 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "contiguous100k",
+      "query_storage": "lds",
+      "gpu_nmse": 6.934519510482343e-05,
+      "qualified": true,
+      "cpu_nmse": 0.0022732140676602936,
+      "upstream_exit": 1,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=1616 warps=8 shared=51264 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided100k",
+      "query_storage": "registers",
+      "gpu_nmse": 7.238462277909062e-05,
+      "qualified": true,
+      "cpu_nmse": 0.002289401697315122,
+      "upstream_exit": 1,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=1616 warps=8 shared=34816 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided100k",
+      "query_storage": "lds",
+      "gpu_nmse": 7.447400903820088e-05,
+      "qualified": true,
+      "cpu_nmse": 0.0022026972858371014,
+      "upstream_exit": 1,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=1616 warps=8 shared=51264 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "contiguous160k",
+      "query_storage": "registers",
+      "gpu_nmse": 0.00011595106639390565,
+      "qualified": true,
+      "cpu_nmse": 0.0035265100561874363,
+      "upstream_exit": 1,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=2500 warps=8 shared=34816 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "contiguous160k",
+      "query_storage": "lds",
+      "gpu_nmse": 0.00010167842106099065,
+      "qualified": true,
+      "cpu_nmse": 0.0033874102420919524,
+      "upstream_exit": 1,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=2500 warps=8 shared=51264 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided160k",
+      "query_storage": "registers",
+      "gpu_nmse": 0.00011386186258427438,
+      "qualified": true,
+      "cpu_nmse": 0.003449801216852309,
+      "upstream_exit": 1,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=2500 warps=8 shared=34816 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided160k",
+      "query_storage": "lds",
+      "gpu_nmse": 0.00011065370448291212,
+      "qualified": true,
+      "cpu_nmse": 0.003614094531060698,
+      "upstream_exit": 1,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=2500 warps=8 shared=51264 kv_batch=64"
+      ]
+    }
+  ],
+  "performance": [
+    {
+      "variant": "strided100k",
+      "position": 1,
+      "query_storage": "registers",
+      "us": 3731.77,
+      "runs": 280,
+      "started_unix": 1795044395.4130442,
+      "ended_unix": 1795044397.4336753,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=1616 warps=8 shared=34816 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided100k",
+      "position": 2,
+      "query_storage": "lds",
+      "us": 4366.45,
+      "runs": 240,
+      "started_unix": 1795044397.4356885,
+      "ended_unix": 1795044399.4270298,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=1616 warps=8 shared=51264 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided100k",
+      "position": 3,
+      "query_storage": "registers",
+      "us": 3732.29,
+      "runs": 280,
+      "started_unix": 1795044399.4287045,
+      "ended_unix": 1795044401.4556532,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=1616 warps=8 shared=34816 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided100k",
+      "position": 4,
+      "query_storage": "lds",
+      "us": 4306.65,
+      "runs": 240,
+      "started_unix": 1795044401.456945,
+      "ended_unix": 1795044403.4438512,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=1616 warps=8 shared=51264 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided100k",
+      "position": 5,
+      "query_storage": "registers",
+      "us": 3721.87,
+      "runs": 280,
+      "started_unix": 1795044403.4452674,
+      "ended_unix": 1795044405.4662857,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=1616 warps=8 shared=34816 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided100k",
+      "position": 6,
+      "query_storage": "lds",
+      "us": 4269.47,
+      "runs": 240,
+      "started_unix": 1795044405.4679022,
+      "ended_unix": 1795044407.4795184,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=1616 warps=8 shared=51264 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided100k",
+      "position": 7,
+      "query_storage": "registers",
+      "us": 3763.0,
+      "runs": 280,
+      "started_unix": 1795044407.4813883,
+      "ended_unix": 1795044409.5103621,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=1616 warps=8 shared=34816 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided100k",
+      "position": 8,
+      "query_storage": "lds",
+      "us": 4289.78,
+      "runs": 240,
+      "started_unix": 1795044409.5116405,
+      "ended_unix": 1795044411.50148,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=1616 warps=8 shared=51264 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided100k",
+      "position": 9,
+      "query_storage": "registers",
+      "us": 3719.87,
+      "runs": 280,
+      "started_unix": 1795044411.5028043,
+      "ended_unix": 1795044413.4906538,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=1616 warps=8 shared=34816 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided160k",
+      "position": 1,
+      "query_storage": "registers",
+      "us": 5718.32,
+      "runs": 182,
+      "started_unix": 1795044413.492297,
+      "ended_unix": 1795044415.8776712,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=2500 warps=8 shared=34816 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided160k",
+      "position": 2,
+      "query_storage": "lds",
+      "us": 6619.12,
+      "runs": 156,
+      "started_unix": 1795044415.881593,
+      "ended_unix": 1795044418.2186327,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=2500 warps=8 shared=51264 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided160k",
+      "position": 3,
+      "query_storage": "registers",
+      "us": 5715.69,
+      "runs": 182,
+      "started_unix": 1795044418.222169,
+      "ended_unix": 1795044420.5769234,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=2500 warps=8 shared=34816 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided160k",
+      "position": 4,
+      "query_storage": "lds",
+      "us": 6594.39,
+      "runs": 156,
+      "started_unix": 1795044420.5804238,
+      "ended_unix": 1795044422.9371119,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=2500 warps=8 shared=51264 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided160k",
+      "position": 5,
+      "query_storage": "registers",
+      "us": 5805.35,
+      "runs": 182,
+      "started_unix": 1795044422.9386501,
+      "ended_unix": 1795044425.3050838,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=2500 warps=8 shared=34816 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided160k",
+      "position": 6,
+      "query_storage": "lds",
+      "us": 6585.1,
+      "runs": 156,
+      "started_unix": 1795044425.3087027,
+      "ended_unix": 1795044427.6340203,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=2500 warps=8 shared=51264 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided160k",
+      "position": 7,
+      "query_storage": "registers",
+      "us": 5755.14,
+      "runs": 182,
+      "started_unix": 1795044427.6356254,
+      "ended_unix": 1795044430.01019,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=2500 warps=8 shared=34816 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided160k",
+      "position": 8,
+      "query_storage": "lds",
+      "us": 6659.67,
+      "runs": 156,
+      "started_unix": 1795044430.0117867,
+      "ended_unix": 1795044432.3460617,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=2500 warps=8 shared=51264 kv_batch=64"
+      ]
+    },
+    {
+      "variant": "strided160k",
+      "position": 9,
+      "query_storage": "registers",
+      "us": 5783.13,
+      "runs": 182,
+      "started_unix": 1795044432.3501072,
+      "ended_unix": 1795044434.7060263,
+      "markers": [
+        "HIP_FA_KV_SPLIT mode=double blocks=8 normal=4 resident=4 tiles=2 kv_tiles=2500 warps=8 shared=34816 kv_batch=64"
+      ]
+    }
+  ],
+  "orders": [
+    "registers",
+    "lds",
+    "registers",
+    "lds",
+    "registers",
+    "lds",
+    "registers",
+    "lds",
+    "registers"
+  ],
+  "dumps": "<repo>\\work\\query-storage-screen-fixtures",
+  "environment": {
+    "registers": {
+      "GGML_HIP_FA_KV_SPLIT": "double",
+      "GGML_HIP_FA_EXPERIMENT": "auto",
+      "GGML_HIP_FA_MMA_TILE": "auto",
+      "GGML_HIP_OP_PROFILE": "0",
+      "GGML_HIP_FA_QUERY_STORAGE": "registers"
+    },
+    "lds": {
+      "GGML_HIP_FA_KV_SPLIT": "double",
+      "GGML_HIP_FA_EXPERIMENT": "auto",
+      "GGML_HIP_FA_MMA_TILE": "auto",
+      "GGML_HIP_OP_PROFILE": "0",
+      "GGML_HIP_FA_QUERY_STORAGE": "lds"
+    }
+  },
+  "median_us": {
+    "strided100k": {
+      "registers": 3731.77,
+      "lds": 4298.215
+    },
+    "strided160k": {
+      "registers": 5755.14,
+      "lds": 6606.755
+    }
+  }
+}

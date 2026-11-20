@@ -1,0 +1,113 @@
+{
+  "numerical": {
+    "auto": {
+      "upstream_exit_code": 1,
+      "oracle_nmse": 0.00013019074378585701,
+      "qualified": true
+    },
+    "half": {
+      "upstream_exit_code": 1,
+      "oracle_nmse": 0.0002663631794129919,
+      "qualified": true
+    },
+    "double": {
+      "upstream_exit_code": 1,
+      "oracle_nmse": 6.98657533968628e-05,
+      "qualified": true
+    },
+    "quad": {
+      "upstream_exit_code": 1,
+      "oracle_nmse": 3.450751688508539e-05,
+      "qualified": true
+    }
+  },
+  "timings": [
+    {
+      "mode": "auto",
+      "repeat": 1,
+      "regular_q3_us": 4986.75
+    },
+    {
+      "mode": "half",
+      "repeat": 1,
+      "regular_q3_us": 9890.95
+    },
+    {
+      "mode": "double",
+      "repeat": 1,
+      "regular_q3_us": 3737.62
+    },
+    {
+      "mode": "quad",
+      "repeat": 1,
+      "regular_q3_us": 3796.1
+    },
+    {
+      "mode": "quad",
+      "repeat": 2,
+      "regular_q3_us": 3825.96
+    },
+    {
+      "mode": "double",
+      "repeat": 2,
+      "regular_q3_us": 3859.14
+    },
+    {
+      "mode": "half",
+      "repeat": 2,
+      "regular_q3_us": 9801.05
+    },
+    {
+      "mode": "auto",
+      "repeat": 2,
+      "regular_q3_us": 5316.7
+    },
+    {
+      "mode": "double",
+      "repeat": 3,
+      "regular_q3_us": 3859.83
+    },
+    {
+      "mode": "auto",
+      "repeat": 3,
+      "regular_q3_us": 5201.24
+    },
+    {
+      "mode": "quad",
+      "repeat": 3,
+      "regular_q3_us": 4088.44
+    },
+    {
+      "mode": "half",
+      "repeat": 3,
+      "regular_q3_us": 10401.56
+    }
+  ],
+  "orders": [
+    [
+      "auto",
+      "half",
+      "double",
+      "quad"
+    ],
+    [
+      "quad",
+      "double",
+      "half",
+      "auto"
+    ],
+    [
+      "double",
+      "auto",
+      "quad",
+      "half"
+    ]
+  ],
+  "backend_sha256": "51230c04fe096226e2a8cd5fc3a37cfc4930c13fc23e086c4c2771bf7343b4b5",
+  "median_q3_us": {
+    "auto": 5201.24,
+    "half": 9890.95,
+    "double": 3859.14,
+    "quad": 3825.96
+  }
+}

@@ -38,7 +38,7 @@ The server is left running in the background with HIP MTP 2, F16 K/V and port 99
 Future launch (run one server at a time):
 
 ```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File "C:\Users\kasper\Documents\GitHub\local-llm\outputs\Start-ROCmServer.ps1" -DraftTokens 2
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".\outputs\Start-ROCmServer.ps1" -DraftTokens 2
 ```
 
 An idle matching server can be stopped using outputs/Stop-ROCmServer.ps1. It refuses to interrupt a busy request. The runtime setup is documented in ../ROCm-runtime-notes.md. Exact requests, server launch, server properties, manifests and raw timing events are saved alongside this report.

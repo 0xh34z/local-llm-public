@@ -6,7 +6,7 @@ This is evidence for a useful configuration on this hardware and workload, not a
 
 ## Normal-mode generation measurements
 
-Ryzen AI 7 350 / Radeon 860M, gfx1152, Windows, isolated ROCm 10.0. llama.cpp b11888, commit `48c9f08b7b25766324282b7605177e2f2be755bb`. Model: `C:\Users\kasper\Desktop\Models\Qwen3.6-35B-A3B-MTP-UD-Q4_K_XL.gguf`.
+Ryzen AI 7 350 / Radeon 860M, gfx1152, Windows, isolated ROCm 10.0. llama.cpp b11888, commit `48c9f08b7b25766324282b7605177e2f2be755bb`. Model: `$env:LLM_MODEL_PATH (e.g. ~\Models\Qwen3.6-35B-A3B-MTP-UD-Q4_K_XL.gguf)`.
 
 All requests allocated 163840 context and had **103220 actual input tokens**, including 103194 restored cached tokens and 26 newly evaluated tokens. Each block discarded a 64-token warmup, then completed three 256-token stochastic samples and a separate 256-token greedy sample. All 20 measured requests completed without truncation. Normal graph replay was enabled; synchronized operation profiling was disabled.
 

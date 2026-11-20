@@ -1,0 +1,33 @@
+{
+    "Commit":  "48c9f08b7b25766324282b7605177e2f2be755bb",
+    "Target":  "gfx1152",
+    "Jobs":  4,
+    "Arguments":  [
+                      "-S",
+                      "<repo>\\work\\llama.cpp",
+                      "-B",
+                      "<repo>\\work\\hip-diagnostic-build",
+                      "-G",
+                      "Ninja",
+                      "-DCMAKE_MAKE_PROGRAM=C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\Ninja\\ninja.exe",
+                      "-DCMAKE_BUILD_TYPE=Release",
+                      "-DCMAKE_PREFIX_PATH=<repo>\\work\\rocm10-build-tools\\Lib\\site-packages\\_rocm_sdk_devel",
+                      "-DHIP_PATH=<repo>\\work\\rocm10-build-tools\\Lib\\site-packages\\_rocm_sdk_devel",
+                      "-DCMAKE_C_COMPILER=<repo>\\work\\rocm10-build-tools\\Lib\\site-packages\\_rocm_sdk_devel\\lib\\llvm\\bin\\clang.exe",
+                      "-DCMAKE_CXX_COMPILER=<repo>\\work\\rocm10-build-tools\\Lib\\site-packages\\_rocm_sdk_devel\\lib\\llvm\\bin\\clang++.exe",
+                      "-DCMAKE_C_FLAGS=-Wno-error=incompatible-pointer-types",
+                      "-DCMAKE_CXX_FLAGS=--hip-path=<repo>/work/rocm10-build-tools/Lib/site-packages/_rocm_sdk_devel --rocm-device-lib-path=<repo>/work/rocm10-build-tools/Lib/site-packages/_rocm_sdk_devel/lib/llvm/amdgcn/bitcode",
+                      "-DGGML_BACKEND_DL=ON",
+                      "-DGGML_NATIVE=OFF",
+                      "-DGGML_CPU=OFF",
+                      "-DGGML_HIP=ON",
+                      "-DGGML_HIP_GRAPHS=ON",
+                      "-DAMDGPU_TARGETS=gfx1152",
+                      "-DLLAMA_BUILD_COMMON=OFF",
+                      "-DLLAMA_BUILD_TESTS=OFF",
+                      "-DLLAMA_BUILD_TOOLS=OFF",
+                      "-DLLAMA_BUILD_EXAMPLES=OFF",
+                      "-DLLAMA_BUILD_SERVER=OFF",
+                      "-DLLAMA_BUILD_APP=OFF"
+                  ]
+}

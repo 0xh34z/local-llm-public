@@ -1,0 +1,212 @@
+{
+  "blocks": [
+    {
+      "case": 1,
+      "mode": "auto",
+      "runs": 3,
+      "mean_tps": 14.624979635679592,
+      "min_tps": 14.10341442003884,
+      "max_tps": 15.303911373668884,
+      "mean_ttft_s": 0.6173361666672766,
+      "output_hashes": [
+        "2931cd9e00a525124d31a503635966b6cab3e7fa7cae9d99e1a0a95635589985",
+        "3a3f2c3b269f820ca5b88a36f6fddd13f0fc15620b4dd15f75bd477c9f20fea9",
+        "265f606c61a0274642a8b11f25a982cbaef0b69a46d3e679effd856505a99aeb"
+      ],
+      "draft_proposed": [
+        212,
+        226,
+        222
+      ],
+      "draft_accepted": [
+        149,
+        141,
+        143
+      ],
+      "greedy": [
+        {
+          "case": 1,
+          "mode": "auto",
+          "trial": "greedy",
+          "temperature": 0.0,
+          "tps": 15.654143372431653,
+          "ttft_s": 0.5960751999991771,
+          "wall_s": 16.893482600000425,
+          "draft_n": 206,
+          "accepted_drafts": 152,
+          "request_sha256": "a823dbc0872e6cae5c6d44d69e27036e82274529e385d391b48ee8a03c70405c",
+          "output_sha256": "1ab98f9004bd4c23b98142eae27fa7bab9e6aa484537bba8030d395f337cf71c"
+        }
+      ]
+    },
+    {
+      "case": 2,
+      "mode": "16",
+      "runs": 3,
+      "mean_tps": 10.732161867787067,
+      "min_tps": 10.516823948862005,
+      "max_tps": 10.848232210366877,
+      "mean_ttft_s": 0.6166277999994539,
+      "output_hashes": [
+        "f0ba72b059fd0aa0ab913f1b3f14409c3e68d59b745fa2aa86b892b51a20929e",
+        "d2e597fb6f38efb2cc4b8622299e884601c286100b13742d51feb1c2d06ab4ec",
+        "278e041375ddb270d38cd42d0773718df50014a7cf25e2bf7f6f05aee4b1a4d3"
+      ],
+      "draft_proposed": [
+        230,
+        220,
+        224
+      ],
+      "draft_accepted": [
+        139,
+        144,
+        143
+      ],
+      "greedy": [
+        {
+          "case": 2,
+          "mode": "16",
+          "trial": "greedy",
+          "temperature": 0.0,
+          "tps": 11.878900064164695,
+          "ttft_s": 0.5885963000000629,
+          "wall_s": 22.068971699998656,
+          "draft_n": 204,
+          "accepted_drafts": 153,
+          "request_sha256": "a823dbc0872e6cae5c6d44d69e27036e82274529e385d391b48ee8a03c70405c",
+          "output_sha256": "c668a96acb16a9b80cf32ae483d5dd1ec26e2a74b46e8bae77d052f2d69461f4"
+        }
+      ],
+      "adjacent_control_tps": 14.574911101835237,
+      "percent_vs_adjacent_controls": -26.36550718696529,
+      "primary_outputs_match_both_controls": false,
+      "greedy_output_matches_both_controls": false
+    },
+    {
+      "case": 3,
+      "mode": "auto",
+      "runs": 3,
+      "mean_tps": 14.52484256799088,
+      "min_tps": 14.193591910520926,
+      "max_tps": 14.972462119230473,
+      "mean_ttft_s": 0.5887997666674588,
+      "output_hashes": [
+        "2931cd9e00a525124d31a503635966b6cab3e7fa7cae9d99e1a0a95635589985",
+        "3a3f2c3b269f820ca5b88a36f6fddd13f0fc15620b4dd15f75bd477c9f20fea9",
+        "265f606c61a0274642a8b11f25a982cbaef0b69a46d3e679effd856505a99aeb"
+      ],
+      "draft_proposed": [
+        212,
+        226,
+        222
+      ],
+      "draft_accepted": [
+        149,
+        141,
+        143
+      ],
+      "greedy": [
+        {
+          "case": 3,
+          "mode": "auto",
+          "trial": "greedy",
+          "temperature": 0.0,
+          "tps": 15.606228537610704,
+          "ttft_s": 0.6031655999977374,
+          "wall_s": 16.9528653999987,
+          "draft_n": 206,
+          "accepted_drafts": 152,
+          "request_sha256": "a823dbc0872e6cae5c6d44d69e27036e82274529e385d391b48ee8a03c70405c",
+          "output_sha256": "1ab98f9004bd4c23b98142eae27fa7bab9e6aa484537bba8030d395f337cf71c"
+        }
+      ]
+    },
+    {
+      "case": 4,
+      "mode": "64",
+      "runs": 3,
+      "mean_tps": 13.584880822474636,
+      "min_tps": 12.791503311644963,
+      "max_tps": 15.0284984532139,
+      "mean_ttft_s": 0.6051103666650306,
+      "output_hashes": [
+        "50228d275a8b0cd6f2974e4cd7938dcdcd65c96d04316f2287169d049e808ab2",
+        "025db00e5264608cb975a8448cde1bbecafa24dd42b7abffcb777b4965adfbfd",
+        "19a1f36f4215a6614c2b3f9ff57b0a91f7e4fb884b1746e1f8c54d6a96ffcbad"
+      ],
+      "draft_proposed": [
+        220,
+        193,
+        227
+      ],
+      "draft_accepted": [
+        144,
+        158,
+        141
+      ],
+      "greedy": [
+        {
+          "case": 4,
+          "mode": "64",
+          "trial": "greedy",
+          "temperature": 0.0,
+          "tps": 13.98175485169635,
+          "ttft_s": 0.5912246000007144,
+          "wall_s": 18.839308899998287,
+          "draft_n": 207,
+          "accepted_drafts": 151,
+          "request_sha256": "a823dbc0872e6cae5c6d44d69e27036e82274529e385d391b48ee8a03c70405c",
+          "output_sha256": "8c8a563b517b84a243bd65fe9cb71ed0e632ee85418bb35402faeb49a89c7c30"
+        }
+      ],
+      "adjacent_control_tps": 14.5350790465523,
+      "percent_vs_adjacent_controls": -6.537275931107156,
+      "primary_outputs_match_both_controls": false,
+      "greedy_output_matches_both_controls": false
+    },
+    {
+      "case": 5,
+      "mode": "auto",
+      "runs": 3,
+      "mean_tps": 14.545315525113718,
+      "min_tps": 14.093759648007522,
+      "max_tps": 15.148056210337709,
+      "mean_ttft_s": 0.6133200333327599,
+      "output_hashes": [
+        "2931cd9e00a525124d31a503635966b6cab3e7fa7cae9d99e1a0a95635589985",
+        "3a3f2c3b269f820ca5b88a36f6fddd13f0fc15620b4dd15f75bd477c9f20fea9",
+        "265f606c61a0274642a8b11f25a982cbaef0b69a46d3e679effd856505a99aeb"
+      ],
+      "draft_proposed": [
+        212,
+        226,
+        222
+      ],
+      "draft_accepted": [
+        149,
+        141,
+        143
+      ],
+      "greedy": [
+        {
+          "case": 5,
+          "mode": "auto",
+          "trial": "greedy",
+          "temperature": 0.0,
+          "tps": 15.602031935217916,
+          "ttft_s": 0.5879598000028636,
+          "wall_s": 16.965641800001322,
+          "draft_n": 206,
+          "accepted_drafts": 152,
+          "request_sha256": "a823dbc0872e6cae5c6d44d69e27036e82274529e385d391b48ee8a03c70405c",
+          "output_sha256": "1ab98f9004bd4c23b98142eae27fa7bab9e6aa484537bba8030d395f337cf71c"
+        }
+      ]
+    }
+  ],
+  "primary_request_hashes": [
+    "a84687703f85aa775ba0a36d59c4fb6072110775967518481bc5f43e87f11283"
+  ],
+  "measured_runs": 20,
+  "complete_five_blocks": true
+}

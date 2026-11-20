@@ -1,0 +1,83 @@
+[
+  {
+    "variant": "strided100k",
+    "mode": "auto",
+    "upstream_exit_code": 1,
+    "gpu_nmse": 0.00014200433130997405,
+    "cpu_nmse": 0.002344279608800456,
+    "split_audit_present": true,
+    "qualified": true
+  },
+  {
+    "variant": "strided100k",
+    "mode": "double",
+    "upstream_exit_code": 1,
+    "gpu_nmse": 6.899442534572485e-05,
+    "cpu_nmse": 0.0022461370773827344,
+    "split_audit_present": true,
+    "qualified": true
+  },
+  {
+    "variant": "strided100k",
+    "mode": "quad",
+    "upstream_exit_code": 1,
+    "gpu_nmse": 3.5181406899352165e-05,
+    "cpu_nmse": 0.0022092503349776024,
+    "split_audit_present": true,
+    "qualified": true
+  },
+  {
+    "variant": "strided160k",
+    "mode": "auto",
+    "upstream_exit_code": 1,
+    "gpu_nmse": 0.00022240308698060483,
+    "cpu_nmse": 0.0036089292044587653,
+    "split_audit_present": true,
+    "qualified": true
+  },
+  {
+    "variant": "strided160k",
+    "mode": "double",
+    "upstream_exit_code": 1,
+    "gpu_nmse": 0.00010401704742388077,
+    "cpu_nmse": 0.0032430432224060043,
+    "split_audit_present": true,
+    "qualified": true
+  },
+  {
+    "variant": "strided160k",
+    "mode": "quad",
+    "upstream_exit_code": 1,
+    "gpu_nmse": 5.234407198139443e-05,
+    "cpu_nmse": 0.0033615713962543677,
+    "split_audit_present": true,
+    "qualified": true
+  },
+  {
+    "variant": "contiguous160k",
+    "mode": "auto",
+    "upstream_exit_code": 1,
+    "gpu_nmse": 0.0002119105875131645,
+    "cpu_nmse": 0.0034389498966166014,
+    "split_audit_present": true,
+    "qualified": true
+  },
+  {
+    "variant": "contiguous160k",
+    "mode": "double",
+    "upstream_exit_code": 1,
+    "gpu_nmse": 0.00010686889307584938,
+    "cpu_nmse": 0.0035219645945293743,
+    "split_audit_present": true,
+    "qualified": true
+  },
+  {
+    "variant": "contiguous160k",
+    "mode": "quad",
+    "upstream_exit_code": 1,
+    "gpu_nmse": 5.78053048757961e-05,
+    "cpu_nmse": 0.003555497220347787,
+    "split_audit_present": true,
+    "qualified": true
+  }
+]

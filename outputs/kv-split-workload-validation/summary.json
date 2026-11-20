@@ -1,0 +1,20 @@
+{
+  "code": {
+    "control_mean_tps": 16.60601552843555,
+    "control_samples": [
+      16.60482425710715,
+      16.60720679976395
+    ],
+    "candidate_tps": 18.52670493996278,
+    "percent_gain": 11.566226758238972
+  },
+  "reasoning": {
+    "control_mean_tps": 17.14662085271207,
+    "control_samples": [
+      17.12437966431993,
+      17.1688620411042
+    ],
+    "candidate_tps": 18.719800812527275,
+    "percent_gain": 9.174868758857402
+  }
+}

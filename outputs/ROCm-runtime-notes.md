@@ -23,11 +23,11 @@ A 1024-input-token / 128-output-token smoke request executed with --device ROCm0
 Start-ROCmServer.ps1 uses the installed local libraries and explicitly selects ROCm0 to prevent silent CPU fallback. Its current defaults are F16 K/V, MTP 2, context 163840, one slot, batch 2048, microbatch 512 and eight threads. Optional -DraftTokens 1 or -DraftTokens 3 changes the MTP count. -ListDevices performs device enumeration only. Run one server at a time. Local slot saving is enabled; the save/reload workflow is documented in Cold-prefill-and-reuse.md.
 
 ```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File "C:\Users\kasper\Documents\GitHub\local-llm\outputs\Start-ROCmServer.ps1"
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".\outputs\Start-ROCmServer.ps1"
 ```
 
 ```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File "C:\Users\kasper\Documents\GitHub\local-llm\outputs\Start-ROCmServer.ps1" -DraftTokens 2
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".\outputs\Start-ROCmServer.ps1" -DraftTokens 2
 ```
 
 If the agent has already started a background server, do not start another on port 9931. Stop-ROCmServer.ps1 stops an idle matching ROCm server on that port. It checks the executable and launch arguments and refuses to interrupt a busy request.

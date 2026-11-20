@@ -1,5 +1,7 @@
 # Radeon 860M: ROCm draft depth and KV precision at 100K
 
+> **Note:** This is the public copy of this report. Small summary files (summaries, samples, manifests) are included, with local paths replaced by placeholders such as `<repo>` and `<models>`. The full raw data (request/response dumps, server logs, generated text, build logs and test fixtures) is not public, so some links in this report do not resolve.
+
 Keep **ROCm + F16 K/V + MTP 2** as the current generation baseline. MTP 3 produced no generation gain in this sample, and Q8 K/V was substantially slower. This is the best generation configuration measured so far, not proof of a global optimum or a sustained 15 tokens/s minimum.
 
 ## Measurements
@@ -52,7 +54,7 @@ The Q8 test server was stopped while idle. F16 MTP 2 was restored on port 9931. 
 The launcher now defaults to MTP 2 and F16, and accepts explicit `-KvCache f16` or `-KvCache q8_0` plus an optional `-LogPath`. Its PowerShell syntax was checked. Future launch, with only one server on port 9931:
 
 ```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File "C:\Users\kasper\Documents\GitHub\local-llm\outputs\Start-ROCmServer.ps1" -DraftTokens 2 -KvCache f16
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File ".\outputs\Start-ROCmServer.ps1" -DraftTokens 2 -KvCache f16
 ```
 
 Remaining distinct work would be a batch/microbatch sweep for cold prefill, repeated trials if small differences matter, and inspection of real Pi prefix reuse. None of those has been measured in this comparison. A custom engine is not required to reproduce the results above.

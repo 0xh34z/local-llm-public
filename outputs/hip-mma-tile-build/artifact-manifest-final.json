@@ -1,0 +1,21 @@
+{
+  "files": [
+    {
+      "path": "<repo>\\work\\backends\\llama-b11888-bin-win-rocm-10.0-x64\\ggml-hip.dll",
+      "sha256": "96bb239b4ae8f343e33512287dfcc89fc18e5d5ebf98632622085cd88825a357",
+      "bytes": 1030626304
+    },
+    {
+      "path": "<repo>\\work\\hip-diagnostic-bin\\ggml-hip.dll",
+      "sha256": "0c77d5a8079301ebffb08de8610caa506a0a692e98aa35530804d2ab59610f80",
+      "bytes": 72023552
+    },
+    {
+      "path": "<repo>\\work\\hip-mma-tile-bin\\ggml-hip.dll",
+      "sha256": "e0dadc941bfb6dd511f89e9382df0c89752ea4fab025f56bd7dfae723c2d26c8",
+      "bytes": 72026112
+    }
+  ],
+  "commit": "48c9f08b7b25766324282b7605177e2f2be755bb",
+  "build_log": "../hip-mma-tile-build-audit/build.log"
+}

@@ -1,5 +1,7 @@
 # Populated 128K: useful gain, still borderline against 15 TPS
 
+> **Note:** This is the public copy of this report. Small summary files (summaries, samples, manifests) are included, with local paths replaced by placeholders such as `<repo>` and `<models>`. The full raw data (request/response dumps, server logs, generated text, build logs and test fixtures) is not public, so some links in this report do not resolve.
+
 The eight-block candidate completed actual 128000-token input without truncation. Initial generation measured **16.604 TPS**, the live 256-token cached follow-up **15.154 TPS**, and a restored-prefix 512-token trial **14.779 TPS**. Thus 128K was not reliably above the user's 15 TPS threshold in this small sample.
 
 The restored trial still improved on matched automatic controls: **14.779 versus 13.840 TPS**, a calculated **6.79% gain**. This experiment was added after the 160K follow-up fell below the target, rather than inferring an unmeasured middle-point rate.

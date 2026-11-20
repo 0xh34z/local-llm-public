@@ -19,7 +19,7 @@ if ($BackendDirectory) { $rocmBackendDirectory = [IO.Path]::GetFullPath($Backend
 $rocmExecutable = Join-Path $rocmBackendDirectory 'llama-server.exe'
 $rocmCoreBin = Join-Path $rocmWorkspace 'work\rocm10-runtime\Lib\site-packages\_rocm_sdk_core\bin'
 $rocmLibrariesBin = Join-Path $rocmWorkspace 'work\rocm10-runtime\Lib\site-packages\_rocm_sdk_libraries\bin'
-$rocmModel = 'C:\Users\kasper\Desktop\Models\Qwen3.6-35B-A3B-MTP-UD-Q4_K_XL.gguf'
+$rocmModel = $(if ($env:LLM_MODEL_PATH) { $env:LLM_MODEL_PATH } else { Join-Path $HOME 'Models\Qwen3.6-35B-A3B-MTP-UD-Q4_K_XL.gguf' })
 $rocmLog = Join-Path $PSScriptRoot 'rocm-server.log'
 if ($LogPath) { $rocmLog = [System.IO.Path]::GetFullPath($LogPath) }
 foreach ($rocmRequired in @($rocmExecutable, $rocmCoreBin, $rocmLibrariesBin)) {

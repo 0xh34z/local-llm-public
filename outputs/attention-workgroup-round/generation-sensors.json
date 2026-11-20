@@ -1,0 +1,542 @@
+[
+  {
+    "case": 1,
+    "trial": 1,
+    "context": "103k",
+    "start_unix": 1795043937.1697183,
+    "end_unix": 1795043951.6734772,
+    "count": 7,
+    "sensors": {
+      "gpu_clock_mhz": {
+        "min": 2625.0,
+        "median": 2848.0,
+        "max": 2915.0
+      },
+      "gpu_temperature_c": {
+        "min": 69.0,
+        "median": 74.0,
+        "max": 76.0
+      },
+      "gpu_usage_percent": {
+        "min": 87.0,
+        "median": 91.0,
+        "max": 91.0
+      },
+      "gpu_power_w": {
+        "min": 29.0,
+        "median": 29.0,
+        "max": 31.0
+      }
+    }
+  },
+  {
+    "case": 1,
+    "trial": 2,
+    "context": "160k",
+    "start_unix": 1795043955.8692586,
+    "end_unix": 1795043973.7958987,
+    "count": 9,
+    "sensors": {
+      "gpu_clock_mhz": {
+        "min": 2700.0,
+        "median": 2755.0,
+        "max": 2807.0
+      },
+      "gpu_temperature_c": {
+        "min": 70.0,
+        "median": 72.0,
+        "max": 74.0
+      },
+      "gpu_usage_percent": {
+        "min": 84.0,
+        "median": 91.0,
+        "max": 91.0
+      },
+      "gpu_power_w": {
+        "min": 26.0,
+        "median": 27.0,
+        "max": 28.0
+      }
+    }
+  },
+  {
+    "case": 1,
+    "trial": 3,
+    "context": "160k",
+    "start_unix": 1795043976.7157967,
+    "end_unix": 1795043993.5324612,
+    "count": 9,
+    "sensors": {
+      "gpu_clock_mhz": {
+        "min": 2214.0,
+        "median": 2656.0,
+        "max": 2734.0
+      },
+      "gpu_temperature_c": {
+        "min": 67.0,
+        "median": 69.0,
+        "max": 71.0
+      },
+      "gpu_usage_percent": {
+        "min": 71.0,
+        "median": 91.0,
+        "max": 93.0
+      },
+      "gpu_power_w": {
+        "min": 25.0,
+        "median": 25.0,
+        "max": 27.0
+      }
+    }
+  },
+  {
+    "case": 1,
+    "trial": 4,
+    "context": "103k",
+    "start_unix": 1795043995.5237353,
+    "end_unix": 1795044010.7831495,
+    "count": 7,
+    "sensors": {
+      "gpu_clock_mhz": {
+        "min": 2534.0,
+        "median": 2646.0,
+        "max": 2681.0
+      },
+      "gpu_temperature_c": {
+        "min": 67.0,
+        "median": 68.0,
+        "max": 71.0
+      },
+      "gpu_usage_percent": {
+        "min": 87.0,
+        "median": 90.0,
+        "max": 91.0
+      },
+      "gpu_power_w": {
+        "min": 24.0,
+        "median": 25.0,
+        "max": 25.0
+      }
+    }
+  },
+  {
+    "case": 1,
+    "trial": 5,
+    "context": "103k",
+    "start_unix": 1795044015.2292047,
+    "end_unix": 1795044021.4235065,
+    "count": 4,
+    "sensors": {
+      "gpu_clock_mhz": {
+        "min": 2479.0,
+        "median": 2604.0,
+        "max": 2636.0
+      },
+      "gpu_temperature_c": {
+        "min": 67.0,
+        "median": 68.5,
+        "max": 70.0
+      },
+      "gpu_usage_percent": {
+        "min": 89.0,
+        "median": 90.0,
+        "max": 92.0
+      },
+      "gpu_power_w": {
+        "min": 24.0,
+        "median": 24.5,
+        "max": 25.0
+      }
+    }
+  },
+  {
+    "case": 1,
+    "trial": 6,
+    "context": "160k",
+    "start_unix": 1795044027.953693,
+    "end_unix": 1795044035.265882,
+    "count": 3,
+    "sensors": {
+      "gpu_clock_mhz": {
+        "min": 2596.0,
+        "median": 2635.0,
+        "max": 2647.0
+      },
+      "gpu_temperature_c": {
+        "min": 70.0,
+        "median": 70.0,
+        "max": 70.0
+      },
+      "gpu_usage_percent": {
+        "min": 90.0,
+        "median": 91.0,
+        "max": 91.0
+      },
+      "gpu_power_w": {
+        "min": 24.0,
+        "median": 25.0,
+        "max": 25.0
+      }
+    }
+  },
+  {
+    "case": 2,
+    "trial": 1,
+    "context": "103k",
+    "start_unix": 1795044056.8798037,
+    "end_unix": 1795044073.245349,
+    "count": 8,
+    "sensors": {
+      "gpu_clock_mhz": {
+        "min": 2515.0,
+        "median": 2731.5,
+        "max": 2753.0
+      },
+      "gpu_temperature_c": {
+        "min": 67.0,
+        "median": 70.0,
+        "max": 73.0
+      },
+      "gpu_usage_percent": {
+        "min": 79.0,
+        "median": 90.5,
+        "max": 92.0
+      },
+      "gpu_power_w": {
+        "min": 24.0,
+        "median": 25.0,
+        "max": 25.0
+      }
+    }
+  },
+  {
+    "case": 2,
+    "trial": 2,
+    "context": "160k",
+    "start_unix": 1795044077.9915662,
+    "end_unix": 1795044100.202322,
+    "count": 11,
+    "sensors": {
+      "gpu_clock_mhz": {
+        "min": 2770.0,
+        "median": 2806.0,
+        "max": 2825.0
+      },
+      "gpu_temperature_c": {
+        "min": 68.0,
+        "median": 70.0,
+        "max": 71.0
+      },
+      "gpu_usage_percent": {
+        "min": 88.0,
+        "median": 90.0,
+        "max": 92.0
+      },
+      "gpu_power_w": {
+        "min": 24.0,
+        "median": 25.0,
+        "max": 25.0
+      }
+    }
+  },
+  {
+    "case": 2,
+    "trial": 3,
+    "context": "160k",
+    "start_unix": 1795044103.7805853,
+    "end_unix": 1795044125.134304,
+    "count": 10,
+    "sensors": {
+      "gpu_clock_mhz": {
+        "min": 2786.0,
+        "median": 2805.0,
+        "max": 2821.0
+      },
+      "gpu_temperature_c": {
+        "min": 68.0,
+        "median": 69.5,
+        "max": 71.0
+      },
+      "gpu_usage_percent": {
+        "min": 89.0,
+        "median": 90.0,
+        "max": 91.0
+      },
+      "gpu_power_w": {
+        "min": 24.0,
+        "median": 25.0,
+        "max": 25.0
+      }
+    }
+  },
+  {
+    "case": 2,
+    "trial": 4,
+    "context": "103k",
+    "start_unix": 1795044127.5180848,
+    "end_unix": 1795044145.5232444,
+    "count": 9,
+    "sensors": {
+      "gpu_clock_mhz": {
+        "min": 1027.0,
+        "median": 2770.0,
+        "max": 2804.0
+      },
+      "gpu_temperature_c": {
+        "min": 60.0,
+        "median": 71.0,
+        "max": 72.0
+      },
+      "gpu_usage_percent": {
+        "min": 10.0,
+        "median": 88.0,
+        "max": 89.0
+      },
+      "gpu_power_w": {
+        "min": 13.0,
+        "median": 24.0,
+        "max": 25.0
+      }
+    }
+  },
+  {
+    "case": 2,
+    "trial": 5,
+    "context": "103k",
+    "start_unix": 1795044150.1804636,
+    "end_unix": 1795044157.4967897,
+    "count": 3,
+    "sensors": {
+      "gpu_clock_mhz": {
+        "min": 2577.0,
+        "median": 2590.0,
+        "max": 2602.0
+      },
+      "gpu_temperature_c": {
+        "min": 67.0,
+        "median": 68.0,
+        "max": 68.0
+      },
+      "gpu_usage_percent": {
+        "min": 89.0,
+        "median": 90.0,
+        "max": 90.0
+      },
+      "gpu_power_w": {
+        "min": 24.0,
+        "median": 24.0,
+        "max": 24.0
+      }
+    }
+  },
+  {
+    "case": 2,
+    "trial": 6,
+    "context": "160k",
+    "start_unix": 1795044164.0237653,
+    "end_unix": 1795044172.8426754,
+    "count": 5,
+    "sensors": {
+      "gpu_clock_mhz": {
+        "min": 2115.0,
+        "median": 2692.0,
+        "max": 2707.0
+      },
+      "gpu_temperature_c": {
+        "min": 66.0,
+        "median": 69.0,
+        "max": 71.0
+      },
+      "gpu_usage_percent": {
+        "min": 93.0,
+        "median": 94.0,
+        "max": 100.0
+      },
+      "gpu_power_w": {
+        "min": 24.0,
+        "median": 25.0,
+        "max": 25.0
+      }
+    }
+  },
+  {
+    "case": 3,
+    "trial": 1,
+    "context": "103k",
+    "start_unix": 1795044193.9945135,
+    "end_unix": 1795044208.9409661,
+    "count": 8,
+    "sensors": {
+      "gpu_clock_mhz": {
+        "min": 1294.0,
+        "median": 2487.0,
+        "max": 2615.0
+      },
+      "gpu_temperature_c": {
+        "min": 67.0,
+        "median": 68.0,
+        "max": 70.0
+      },
+      "gpu_usage_percent": {
+        "min": 35.0,
+        "median": 90.0,
+        "max": 91.0
+      },
+      "gpu_power_w": {
+        "min": 24.0,
+        "median": 24.0,
+        "max": 26.0
+      }
+    }
+  },
+  {
+    "case": 3,
+    "trial": 2,
+    "context": "160k",
+    "start_unix": 1795044213.1928196,
+    "end_unix": 1795044231.424059,
+    "count": 9,
+    "sensors": {
+      "gpu_clock_mhz": {
+        "min": 2462.0,
+        "median": 2649.0,
+        "max": 2677.0
+      },
+      "gpu_temperature_c": {
+        "min": 68.0,
+        "median": 70.0,
+        "max": 72.0
+      },
+      "gpu_usage_percent": {
+        "min": 83.0,
+        "median": 91.0,
+        "max": 92.0
+      },
+      "gpu_power_w": {
+        "min": 24.0,
+        "median": 25.0,
+        "max": 25.0
+      }
+    }
+  },
+  {
+    "case": 3,
+    "trial": 3,
+    "context": "160k",
+    "start_unix": 1795044234.4061067,
+    "end_unix": 1795044251.4477735,
+    "count": 9,
+    "sensors": {
+      "gpu_clock_mhz": {
+        "min": 1304.0,
+        "median": 2665.0,
+        "max": 2674.0
+      },
+      "gpu_temperature_c": {
+        "min": 68.0,
+        "median": 70.0,
+        "max": 71.0
+      },
+      "gpu_usage_percent": {
+        "min": 31.0,
+        "median": 91.0,
+        "max": 92.0
+      },
+      "gpu_power_w": {
+        "min": 24.0,
+        "median": 25.0,
+        "max": 27.0
+      }
+    }
+  },
+  {
+    "case": 3,
+    "trial": 4,
+    "context": "103k",
+    "start_unix": 1795044253.451237,
+    "end_unix": 1795044268.9280806,
+    "count": 8,
+    "sensors": {
+      "gpu_clock_mhz": {
+        "min": 2349.0,
+        "median": 2573.5,
+        "max": 2665.0
+      },
+      "gpu_temperature_c": {
+        "min": 69.0,
+        "median": 71.0,
+        "max": 71.0
+      },
+      "gpu_usage_percent": {
+        "min": 79.0,
+        "median": 90.5,
+        "max": 91.0
+      },
+      "gpu_power_w": {
+        "min": 24.0,
+        "median": 25.0,
+        "max": 25.0
+      }
+    }
+  },
+  {
+    "case": 3,
+    "trial": 5,
+    "context": "103k",
+    "start_unix": 1795044273.4488113,
+    "end_unix": 1795044279.7027712,
+    "count": 3,
+    "sensors": {
+      "gpu_clock_mhz": {
+        "min": 2530.0,
+        "median": 2590.0,
+        "max": 2627.0
+      },
+      "gpu_temperature_c": {
+        "min": 68.0,
+        "median": 68.0,
+        "max": 70.0
+      },
+      "gpu_usage_percent": {
+        "min": 90.0,
+        "median": 90.0,
+        "max": 91.0
+      },
+      "gpu_power_w": {
+        "min": 24.0,
+        "median": 24.0,
+        "max": 24.0
+      }
+    }
+  },
+  {
+    "case": 3,
+    "trial": 6,
+    "context": "160k",
+    "start_unix": 1795044286.362695,
+    "end_unix": 1795044293.740223,
+    "count": 4,
+    "sensors": {
+      "gpu_clock_mhz": {
+        "min": 2502.0,
+        "median": 2591.0,
+        "max": 2651.0
+      },
+      "gpu_temperature_c": {
+        "min": 69.0,
+        "median": 69.5,
+        "max": 70.0
+      },
+      "gpu_usage_percent": {
+        "min": 91.0,
+        "median": 91.0,
+        "max": 95.0
+      },
+      "gpu_power_w": {
+        "min": 24.0,
+        "median": 25.0,
+        "max": 25.0
+      }
+    }
+  }
+]

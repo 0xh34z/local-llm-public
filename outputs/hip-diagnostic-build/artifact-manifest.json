@@ -1,0 +1,16 @@
+{
+  "SourceCommit": "48c9f08b7b25766324282b7605177e2f2be755bb",
+  "OriginalDll": {
+    "Algorithm": "SHA256",
+    "Hash": "96BB239B4AE8F343E33512287DFCC89FC18E5D5EBF98632622085CD88825A357",
+    "Path": "<repo>\\work\\backends\\llama-b11888-bin-win-rocm-10.0-x64\\ggml-hip.dll"
+  },
+  "DiagnosticDll": {
+    "Algorithm": "SHA256",
+    "Hash": "0C77D5A8079301EBFFB08DE8610CAA506A0A692E98AA35530804D2AB59610F80",
+    "Path": "<repo>\\work\\hip-diagnostic-bin\\ggml-hip.dll"
+  },
+  "DiagnosticBytes": 72023552,
+  "ProfileFlag": "GGML_HIP_OP_PROFILE=1",
+  "GraphsDisabledOnlyWhenProfileFlagSet": true
+}

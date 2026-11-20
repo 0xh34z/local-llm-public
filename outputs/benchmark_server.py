@@ -1,4 +1,4 @@
-"""Owned server lifecycle for sequential, local inference experiments."""
+﻿"""Owned server lifecycle for sequential, local inference experiments."""
 from contextlib import contextmanager
 import json
 from pathlib import Path
@@ -14,7 +14,7 @@ BASE_BACKEND = ROOT / 'work/backends/llama-b11888-bin-win-rocm-10.0-x64'
 
 
 @contextmanager
-def server(directory, arguments=(), backend=BASE_BACKEND, launcher=None, expected=None):
+def server(directory, arguments=(), backend=BASE_BACKEND, launcher=None, expected=None, stopper=None):
     """Refuse occupied port; stop only this experiment's identified, idle server."""
     directory = Path(directory).resolve()
     backend = Path(backend).resolve()
@@ -67,7 +67,7 @@ def server(directory, arguments=(), backend=BASE_BACKEND, launcher=None, expecte
         yield props
     finally:
         if own_pid is not None and any(p['ProcessId']==own_pid for p in processes()):
-            powershell('& '+psquote(TOOLS/'Stop-ROCmServer.ps1')+' -BackendDirectory '+psquote(backend))
+            powershell('& '+psquote(stopper or TOOLS/'Stop-ROCmServer.ps1')+' -BackendDirectory '+psquote(backend))
             deadline=time.monotonic()+20
             while any(p['ProcessId']==own_pid for p in processes()):
                 if time.monotonic()>deadline:

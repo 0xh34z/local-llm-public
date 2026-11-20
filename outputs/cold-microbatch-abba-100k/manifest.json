@@ -1,0 +1,12 @@
+{
+  "order": [
+    512,
+    1024,
+    1024,
+    512
+  ],
+  "prompt_file": "outputs\\rocm-100k-mtp2-f16-results\\cold-102400-mtp2-request.json",
+  "request_sha256": "572a0e822a86213d60e076b486c7f72a22d8040a322d69605b487130c63c31cd",
+  "hip_sha256": "51230c04fe096226e2a8cd5fc3a37cfc4930c13fc23e086c4c2771bf7343b4b5",
+  "kv_split": "double"
+}
