@@ -1,0 +1,11 @@
+{
+  "name": "websearch-extension-tests",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test websearch.test.mjs"
+  },
+  "devDependencies": {
+    "@sinclair/typebox": "^0.34.52"
+  }
+}

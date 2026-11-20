@@ -10,7 +10,10 @@ param(
     [ValidateRange(1,64)][int]$BatchThreads = 8,
     [ValidateRange(0,64)][int]$DraftThreads = 0,
     [string]$SlotSavePath = (Join-Path (Split-Path -Parent $PSScriptRoot) 'work\slot-cache'),
-    [ValidateRange(0,5)][int]$LogVerbosity = 3
+    [ValidateRange(0,5)][int]$LogVerbosity = 3,
+    [ValidateRange(1, 65535)][int]$Port = 9931,
+    [string]$ModelPath,
+    [ValidateRange(1024, 1048576)][int]$Context = 163840
 )
 $ErrorActionPreference = 'Stop'
 $rocmWorkspace = Split-Path -Parent $PSScriptRoot
@@ -19,7 +22,9 @@ if ($BackendDirectory) { $rocmBackendDirectory = [IO.Path]::GetFullPath($Backend
 $rocmExecutable = Join-Path $rocmBackendDirectory 'llama-server.exe'
 $rocmCoreBin = Join-Path $rocmWorkspace 'work\rocm10-runtime\Lib\site-packages\_rocm_sdk_core\bin'
 $rocmLibrariesBin = Join-Path $rocmWorkspace 'work\rocm10-runtime\Lib\site-packages\_rocm_sdk_libraries\bin'
-$rocmModel = $(if ($env:LLM_MODEL_PATH) { $env:LLM_MODEL_PATH } else { Join-Path $HOME 'Models\Qwen3.6-35B-A3B-MTP-UD-Q4_K_XL.gguf' })
+$rocmModel = $ModelPath
+if (-not $rocmModel) { $rocmModel = $env:LLM_MODEL_PATH }
+if (-not $rocmModel) { $rocmModel = Join-Path $HOME 'Models\Qwen3.6-35B-A3B-MTP-UD-Q4_K_XL.gguf' }
 $rocmLog = Join-Path $PSScriptRoot 'rocm-server.log'
 if ($LogPath) { $rocmLog = [System.IO.Path]::GetFullPath($LogPath) }
 foreach ($rocmRequired in @($rocmExecutable, $rocmCoreBin, $rocmLibrariesBin)) {
@@ -37,11 +42,11 @@ try {
     } else {
         $rocmArguments = @(
             '-m', $rocmModel, '--device', 'ROCm0',
-            '-c', '163840', '-np', '1', '-ngl', '99', '-fa', 'on', '--jinja',
+            '-c', "$Context", '-np', '1', '-ngl', '99', '-fa', 'on', '--jinja',
             '-ctk', $KvCache, '-ctv', $KvCache, '-b', "$BatchSize", '-ub', "$MicroBatchSize",
             '-t', "$Threads", '-tb', "$BatchThreads", '-td', "$rocmDraftThreads", '-tbd', "$BatchThreads",
             '--spec-type', 'draft-mtp', '--spec-draft-n-max', "$DraftTokens",
-            '--port', '9931', '-lm', 'auto', '-lv', "$LogVerbosity"
+            '--port', "$Port", '-lm', 'auto', '-lv', "$LogVerbosity"
         )
         if ($SlotSavePath) {
             $rocmSlotDirectory = [System.IO.Path]::GetFullPath($SlotSavePath)

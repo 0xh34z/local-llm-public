@@ -1,0 +1,68 @@
+name: checks
+
+"on":
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile Python sources
+        run: python -m compileall -q outputs
+      - name: Validate JSON files
+        run: python outputs/check_json.py
+      - name: Check SHA-256 values
+        run: python outputs/check_hashes.py
+      - name: Check Markdown links
+        run: python outputs/check_links.py --all
+      - name: Install byte_budget test dependencies
+        run: python -m pip install -r outputs/requirements.txt
+      - name: Test byte_budget
+        run: python outputs/test_byte_budget.py
+
+  powershell:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shell: [powershell, pwsh]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Parse PowerShell scripts
+        shell: ${{ matrix.shell }}
+        run: |
+          $failed = $false
+          Get-ChildItem -Path . -Recurse -Filter *.ps1 | ForEach-Object {
+              $tokens = $null
+              $errors = $null
+              [System.Management.Automation.Language.Parser]::ParseFile($_.FullName, [ref]$tokens, [ref]$errors) | Out-Null
+              if ($errors.Count -gt 0) {
+                  $failed = $true
+                  Write-Host "Parse errors: $($_.FullName)"
+                  $errors | ForEach-Object { Write-Host "  line $($_.Extent.StartLineNumber): $($_.Message)" }
+              }
+          }
+          if ($failed) { exit 1 }
+          Write-Host "PowerShell scripts parse with $($PSVersionTable.PSVersion)"
+
+  node:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Run self-contained performance extension tests
+        run: node --test outputs/pi-extensions/performance/performance.test.mjs
+      - name: Install websearch test dependencies
+        run: npm ci --prefix outputs/pi-extensions/websearch
+      - name: Run websearch extension tests
+        run: node --test outputs/pi-extensions/websearch/websearch.test.mjs

@@ -33,6 +33,9 @@ work/
 # .pi agent configuration
 .pi/
 
+# Node dependencies
+node_modules/
+
 # OS files
 .DS_Store
 Thumbs.db

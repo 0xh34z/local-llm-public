@@ -53,18 +53,27 @@ Small summary files (summaries, samples, manifests, comparisons) are included ne
 
 ## Layout
 
-- `outputs/`: launchers, benchmark and analysis scripts, patches, reports, and Pi extensions.
+- `outputs/`: launchers, benchmark and analysis scripts, patches, reports, and Pi extensions. [INDEX.md](outputs/INDEX.md) maps public artifacts and known-private data.
 - `work/`: not in this repo. Runtimes, backends, private HIP builds and slot caches go here locally.
 
-Useful scripts: `Start-ROCmServer.ps1` (launcher), `Manage-LLMSlot.ps1` (slot save and restore), `byte_budget.py` (GGUF byte floors), `stream_bandwidth.hip` (bandwidth probe), `launch_overhead.hip` (dispatch and event overhead probe), `run_depth_bench.ps1` (depth benchmark, `-Runtime vulkan` for Vulkan).
+Useful scripts: `Check-Repo.ps1` (runs every local check), `Start-ROCmServer.ps1` (launcher), `Manage-LLMSlot.ps1` (slot save and restore), `byte_budget.py` (GGUF byte floors; needs `numpy` and `PyYAML` from `outputs/requirements.txt` plus a llama.cpp checkout with `gguf-py`), `stream_bandwidth.hip` (bandwidth probe), `launch_overhead.hip` (dispatch and event overhead probe), `run_depth_bench.ps1` (depth benchmark, `-Runtime vulkan` for Vulkan), `run_benchmarks.ps1` (three-test summary).
+
+## Building from source
+
+Full build instructions are in [BUILD.md](BUILD.md). It covers:
+
+1. Installing the ROCm 10.0 runtime (pip wheels, no system install needed)
+2. Downloading the official llama.cpp b11888 ROCm release as the unpatched baseline
+3. Applying the 8-block KV split patch and building only the replacement `ggml-hip.dll`
+4. Downloading the official Vulkan release for comparison
+5. SHA-256 hashes for the official release DLLs and the patched HIP backend
 
 ## Running it
 
-Not included, you have to provide them:
+Prerequisites:
 
-1. The llama.cpp b11888 ROCm backend at `work/backends/llama-b11888-bin-win-rocm-10.0-x64`.
-2. An isolated ROCm runtime at `work/rocm10-runtime` (see [ROCm runtime notes](outputs/ROCm-runtime-notes.md) and `outputs/rocm-runtime-requirements.txt`).
-3. The model: [unsloth/Qwen3.6-35B-A3B-MTP-GGUF](https://huggingface.co/unsloth/Qwen3.6-35B-A3B-MTP-GGUF), `UD-Q4_K_XL`. Set `LLM_MODEL_PATH` to the file, or put it at `~\Models\Qwen3.6-35B-A3B-MTP-UD-Q4_K_XL.gguf`.
+1. Build the backend(s) following [BUILD.md](BUILD.md), or download the official llama.cpp Windows releases.
+2. The model: [unsloth/Qwen3.6-35B-A3B-MTP-GGUF](https://huggingface.co/unsloth/Qwen3.6-35B-A3B-MTP-GGUF), `UD-Q4_K_XL` (~21 GB). Set `LLM_MODEL_PATH` to the file, or put it at `~\Models\Qwen3.6-35B-A3B-MTP-UD-Q4_K_XL.gguf`.
 
 ```powershell
 $env:LLM_MODEL_PATH = 'D:\Models\Qwen3.6-35B-A3B-MTP-UD-Q4_K_XL.gguf'   # optional
@@ -77,7 +86,35 @@ With explicit options:
 .\outputs\Start-ROCmServer.ps1 -DraftTokens 2 -KvCache f16 -Threads 8 -BatchSize 2048 -MicroBatchSize 512
 ```
 
-Experimental HIP builds (8-block KV split and the other rounds) are private builds that have to be compiled from the patches against the matching llama.cpp commit (`48c9f08b7b25766324282b7605177e2f2be755bb`). There are no build instructions yet. Some scripts have other environment overrides, for example `NUMPY_PYTHON` for `screen_kv_split.py`.
+The launcher and its stop script accept `-Port` (default 9931); the launchers also
+accept `-ModelPath` and `-Context` if your setup differs from the defaults.
+
+To reproduce the numbers in this repo, use the 8-block patched backend (`work/hip-kv-split-bin`). See BUILD.md step 3 for the patch and build steps.
+
+## Quick benchmark
+
+Run the standard three-test benchmark suite:
+
+```powershell
+.\outputs\run_benchmarks.ps1
+.\outputs\run_benchmarks.ps1 -Runtime Vulkan
+```
+
+The script always runs test 1, the 103K populated decode measurement. Tests 2 and 3
+are cached-prefix measurements and need a saved slot, because slots are large and
+contain generated conversation state, so they are not in this repo:
+
+```powershell
+.\outputs\run_benchmarks.ps1 -Slot103k my-103k.bin -Slot160k my-160k.bin
+```
+
+Without those arguments the cached tests are recorded as skipped, not silently
+substituted with another run. Use `-Port`, `-Context` and `-ModelPath` if your
+server port, allocation or model location differs from the defaults.
+
+Expect roughly 15-17 tok/s for test 1 at 103K,
+14-15 tok/s for a cached 103K prefix, and 13-15 tok/s for a cached 160K prefix on a
+Ryzen AI 7 350 / Radeon 860M.
 
 ## Pi extensions
 
@@ -91,7 +128,7 @@ In `outputs/pi-extensions/` for the [Pi](https://github.com/earendil-works/pi) c
 
 - Comparisons are bracketed (control, candidate, candidate, control) because laptop thermals and clock drift can fake a few percent.
 - Tokens/s figures are synthetic throughput on specific prompts, not quality scores. Candidate runs often generate different tokens and different MTP work, so these are end-to-end results, not fixed-work kernel percentages.
-- Kernel changes are checked against an independent float64 reference. The upstream CPU comparison was inaccurate on the captured long-context fixtures, and the Q1 discrepancy is unresolved.
+- Kernel changes are checked against an independent float64 reference. The upstream CPU comparison was inaccurate on the captured long-context fixtures, and the Q1 discrepancy is unresolved (Q1-quantized variants produce numerical mismatches attributed to quantization artifacts corrupting the CPU reference comparison; all kernel changes are validated against float64).
 - No sustained generation floor has been established. Allocated context is not the same as populated context, so reports state both.
 - Nothing here is a production recommendation or a quality guarantee.
 

@@ -4,7 +4,10 @@ param(
     [ValidateRange(32,8192)][int]$MicroBatchSize = 512,
     [ValidateRange(1,64)][int]$BatchThreads = 8,
     [string]$BackendDirectory,
-    [string]$LogPath
+    [string]$LogPath,
+    [ValidateRange(1, 65535)][int]$Port = 9931,
+    [string]$ModelPath,
+    [ValidateRange(1024, 1048576)][int]$Context = 163840
 )
 $ErrorActionPreference = 'Stop'
 $splitRoot = Split-Path -Parent $PSScriptRoot
@@ -25,7 +28,8 @@ try {
     }
     & (Join-Path $PSScriptRoot 'Start-ROCmServer.ps1') -BackendDirectory $splitBackend `
         -DraftTokens 2 -KvCache f16 -Threads 8 -DraftThreads 8 -BatchThreads $BatchThreads `
-        -BatchSize $BatchSize -MicroBatchSize $MicroBatchSize -LogPath $LogPath
+        -BatchSize $BatchSize -MicroBatchSize $MicroBatchSize -LogPath $LogPath `
+        -Port $Port -ModelPath $ModelPath -Context $Context
 }
 finally {
     foreach ($splitKey in $splitSaved.Keys) {

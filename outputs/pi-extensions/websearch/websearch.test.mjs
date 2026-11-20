@@ -1,16 +1,24 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import os from "node:os";
 import path from "node:path";
 import fs from "node:fs";
-import { createRequire } from "node:module";
 import { pathToFileURL } from "node:url";
+import { Type } from "@sinclair/typebox";
+import { Value } from "@sinclair/typebox/value";
 import { createTools, request, localDate, dateContext } from "./websearch.mjs";
 
-const agent = path.join(process.env.USERPROFILE, ".pi/agent");
-const version = fs.readFileSync(path.join(agent, "install/current-version"), "utf8").trim();
-const require = createRequire(path.join(agent, "install/releases", version, "node_modules/@earendil-works/pi-coding-agent/package.json"));
-const { Type } = require("typebox");
-const { Value } = require("typebox/value");
+const agent = path.join(process.env.USERPROFILE || os.homedir(), ".pi/agent");
+let version = null;
+try {
+  version = fs.readFileSync(path.join(agent, "install/current-version"), "utf8").trim();
+} catch {
+  // Pi is optional for the unit tests; only the loader integration test needs it.
+}
+const piLoader = version
+  ? path.join(agent, "install/releases", version, "node_modules/@earendil-works/pi-coding-agent/dist/core/extensions/loader.js")
+  : null;
+const piAvailable = piLoader && fs.existsSync(piLoader);
 const json = data => new Response(JSON.stringify(data));
 const key = async () => "tvly-test-not-real";
 
@@ -65,8 +73,9 @@ test("size limit, cancellation and credential redaction", async () => {
   assert.equal(data.results[0].content, "[REDACTED]");
 });
 
-test("actual installed Pi loader registers both tools and status command", async () => {
-  const { loadExtensions } = await import(pathToFileURL(path.join(agent, "install/releases", version, "node_modules/@earendil-works/pi-coding-agent/dist/core/extensions/loader.js")));
+test("actual installed Pi loader registers both tools and status command",
+  { skip: piAvailable ? false : "Pi agent is not installed" }, async () => {
+  const { loadExtensions } = await import(pathToFileURL(piLoader));
   const entry = new URL("./index.js", import.meta.url);
   const loaded = await loadExtensions([decodeURIComponent(entry.pathname).replace(/^\/(\w:)/, "$1")], process.cwd());
   assert.deepEqual(loaded.errors, []); assert.equal(loaded.extensions.length, 1);
