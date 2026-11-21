@@ -2,7 +2,7 @@
 
 Notes, scripts and benchmark evidence from tuning Qwen3.6-35B-A3B (a MoE model with a native MTP draft head) on a Framework Laptop 13: Ryzen AI 7 350, Radeon 860M (gfx1152), 64 GB DDR5-5600, Windows 11. The goal is a usable local coding agent at 100K+ populated context, with a practical target of 15 generation tokens/s.
 
-Blog post: "Running LLM to the silicon limit" on [kaspervandekimmenade.nl](https://kaspervandekimmenade.nl/)
+Blog post on [kaspervandekimmenade.nl](https://kaspervandekimmenade.nl/)
 
 This is a personal research repo, not a polished project. Numbers are measurements from one machine. Where something is a calculation or a hypothesis, the report says so.
 
@@ -79,7 +79,8 @@ Requirements: Windows 11, an AMD GPU supported by the ROCm 10.0 wheels (tested o
    .\llm.ps1 -Update
    ```
 
-   This creates the isolated ROCm runtime in `workocm10-runtime` if it is missing, downloads the newest official llama.cpp Windows ROCm release into `workackends\`, smoke-tests it with your model, and only then makes it the active backend. Re-run it any time to upgrade; old versions stay on disk. Use `-Tag b11888` to install or roll back to a specific release.
+   This creates the isolated ROCm runtime in `work
+ocm10-runtime` if it is missing, downloads the newest official llama.cpp Windows ROCm release into `workackends\`, smoke-tests it with your model, and only then makes it the active backend. Re-run it any time to upgrade; old versions stay on disk. Use `-Tag b11888` to install or roll back to a specific release.
 3. Start the server:
 
    ```powershell
