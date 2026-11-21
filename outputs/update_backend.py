@@ -64,7 +64,7 @@ def download(asset, dest_zip):
         sys.exit(f"SHA256 mismatch for {asset['name']}")
 
 
-def ensure_runtime():
+def ensure_runtime(gfx):
     """Create the isolated ROCm runtime venv (BUILD.md step 1) if it is missing."""
     venv = ROOT / 'work' / 'rocm10-runtime'
     if (venv / 'Lib' / 'site-packages' / '_rocm_sdk_core' / 'bin').is_dir():
@@ -75,7 +75,7 @@ def ensure_runtime():
     subprocess.run([py, '-m', 'pip', 'install', '--upgrade', 'pip'], check=True)
     subprocess.run([py, '-m', 'pip', 'install', '--index-url', 'https://stable.repo.amd.com/rocm/whl-next/',
                     'rocm==10.0.0', 'rocm-sdk-core==10.0.0', 'rocm-sdk-libraries==10.0.0',
-                    'rocm-sdk-device-gfx1152==10.0.0'], check=True)
+                    f'rocm-sdk-device-{gfx}==10.0.0'], check=True)
 
 
 def find_server(directory):
@@ -112,12 +112,13 @@ def main():
     ap.add_argument('--tag', help='release tag to install (default: newest)')
     ap.add_argument('--model', help='model used for the smoke test')
     ap.add_argument('--skip-test', action='store_true')
+    ap.add_argument('--gfx', default='gfx1152', help='GPU target for the ROCm device package (default: gfx1152, Radeon 860M)')
     ap.add_argument('--test-port', type=int, default=9939)
     ap.add_argument('--test-timeout', type=int, default=300, help='seconds to wait for /health')
     args = ap.parse_args()
 
     BACKENDS.mkdir(parents=True, exist_ok=True)
-    ensure_runtime()
+    ensure_runtime(args.gfx)
     release = find_release(args.tag)
     assets = rocm_assets(release)
     asset = next((a for a in assets if 'rocm-10.0' in a['name']), assets[0])  # match repo's ROCm 10.0 runtime

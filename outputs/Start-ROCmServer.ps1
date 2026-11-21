@@ -1,6 +1,8 @@
 param(
     [switch]$ListDevices,
     [ValidateSet(1,2,3)][int]$DraftTokens = 2,
+    # auto: use MTP speculative decoding only if the model file name contains 'MTP'.
+    [ValidateSet('auto','mtp','off')][string]$Speculative = 'auto',
     [ValidateSet('f16','q8_0')][string]$KvCache = 'f16',
     [string]$BackendDirectory,
     [string]$LogPath,
@@ -51,9 +53,10 @@ try {
             '-c', "$Context", '-np', '1', '-ngl', '99', '-fa', 'on', '--jinja',
             '-ctk', $KvCache, '-ctv', $KvCache, '-b', "$BatchSize", '-ub', "$MicroBatchSize",
             '-t', "$Threads", '-tb', "$BatchThreads", '-td', "$rocmDraftThreads", '-tbd', "$BatchThreads",
-            '--spec-type', 'draft-mtp', '--spec-draft-n-max', "$DraftTokens",
             '--port', "$Port", '-lm', 'auto', '-lv', "$LogVerbosity"
         )
+        $rocmUseMtp = ($Speculative -eq 'mtp') -or ($Speculative -eq 'auto' -and (Split-Path -Leaf $rocmModel) -match 'MTP')
+        if ($rocmUseMtp) { $rocmArguments += @('--spec-type', 'draft-mtp', '--spec-draft-n-max', "$DraftTokens") }
         if ($SlotSavePath) {
             $rocmSlotDirectory = [System.IO.Path]::GetFullPath($SlotSavePath)
             if (-not (Test-Path -LiteralPath $rocmSlotDirectory)) {

@@ -72,7 +72,7 @@ Full build instructions are in [BUILD.md](BUILD.md). It covers:
 
 Requirements: Windows 11, an AMD GPU supported by the ROCm 10.0 wheels (tested on a Radeon 860M, gfx1152), and Python 3.11+.
 
-1. Put a `.gguf` model in the `models\` folder ([unsloth/Qwen3.6-35B-A3B-MTP-GGUF](https://huggingface.co/unsloth/Qwen3.6-35B-A3B-MTP-GGUF), `UD-Q4_K_XL`, ~21 GB, is what this repo is tuned for) and set `$ModelName` at the top of `llm.ps1` to its file name.
+1. Get a model: `.\llm.ps1 -DownloadModel` downloads the one this repo is tuned for ([unsloth/Qwen3.6-35B-A3B-MTP-GGUF](https://huggingface.co/unsloth/Qwen3.6-35B-A3B-MTP-GGUF), `UD-Q4_K_XL`, ~21 GB) into `models\`. Or drop any `.gguf` there yourself; if there are several, set `$ModelName` at the top of `llm.ps1`. MTP speculative decoding is switched on automatically when the file name contains `MTP`.
 2. Install the backend:
 
    ```powershell
@@ -85,6 +85,8 @@ Requirements: Windows 11, an AMD GPU supported by the ROCm 10.0 wheels (tested o
    ```powershell
    .\llm.ps1
    ```
+
+Using an AI agent? See [AGENTS.md](AGENTS.md).
 
 The reproducible benchmark setup (pinned b11888 plus the optional patched DLL) is documented in [BUILD.md](BUILD.md).
 
