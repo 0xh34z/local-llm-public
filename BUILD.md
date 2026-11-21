@@ -54,6 +54,10 @@ automatically.
 
 ## 2. Baseline backend: official b11888 ROCm release
 
+> For everyday use, `.\llm.ps1 -Update` installs the newest official release automatically
+> (and creates the step 1 runtime). Follow this section only to pin the exact b11888 baseline
+> used by the reports; `.\llm.ps1 -Update -Tag b11888` does the same thing.
+
 Download the official Windows ROCm x64 asset. Do not rebuild the baseline if you
 want to compare hashes with the reports: the published DLL is a multi-target
 release of about 1.03 GB, while a local `gfx1152` build is about 72 MB.
@@ -269,17 +273,9 @@ Download `Qwen3.6-35B-A3B-MTP-UD-Q4_K_XL.gguf` from
 [unsloth/Qwen3.6-35B-A3B-MTP-GGUF](https://huggingface.co/unsloth/Qwen3.6-35B-A3B-MTP-GGUF)
 (about 21 GB).
 
-Place it at:
-
-```text
-%USERPROFILE%\Models\Qwen3.6-35B-A3B-MTP-UD-Q4_K_XL.gguf
-```
-
-Or set:
-
-```powershell
-$env:LLM_MODEL_PATH = 'D:\Models\Qwen3.6-35B-A3B-MTP-UD-Q4_K_XL.gguf'
-```
+Place it in the repository's `models\` folder and set `$ModelName` at the top of
+`llm.ps1` to the file name. Other scripts accept `-ModelPath` or the `LLM_MODEL_PATH`
+environment variable.
 
 ---
 

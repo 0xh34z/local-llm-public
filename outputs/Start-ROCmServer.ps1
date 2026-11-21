@@ -18,6 +18,12 @@ param(
 $ErrorActionPreference = 'Stop'
 $rocmWorkspace = Split-Path -Parent $PSScriptRoot
 $rocmBackendDirectory = Join-Path $rocmWorkspace 'work\backends\llama-b11888-bin-win-rocm-10.0-x64'
+# Active backend chosen by Update-Backend.ps1 (path relative to work\backends).
+$rocmCurrentFile = Join-Path $rocmWorkspace 'work\backends\current.txt'
+if (Test-Path -LiteralPath $rocmCurrentFile) {
+    $rocmCurrent = (Get-Content -LiteralPath $rocmCurrentFile -Raw).Trim()
+    if ($rocmCurrent) { $rocmBackendDirectory = Join-Path $rocmWorkspace "work\backends\$rocmCurrent" }
+}
 if ($BackendDirectory) { $rocmBackendDirectory = [IO.Path]::GetFullPath($BackendDirectory) }
 $rocmExecutable = Join-Path $rocmBackendDirectory 'llama-server.exe'
 $rocmCoreBin = Join-Path $rocmWorkspace 'work\rocm10-runtime\Lib\site-packages\_rocm_sdk_core\bin'

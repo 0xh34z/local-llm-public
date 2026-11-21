@@ -18,7 +18,6 @@ work/slot-cache/
 
 # Model weights
 *.gguf
-Models/
 
 # Private HIP backend builds
 work/backends/hip-*/
@@ -43,3 +42,7 @@ Thumbs.db
 # IDE
 .vscode/
 .idea/
+
+# Models dir: keep folder, ignore contents
+models/*
+!models/.gitkeep

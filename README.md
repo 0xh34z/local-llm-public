@@ -68,17 +68,25 @@ Full build instructions are in [BUILD.md](BUILD.md). It covers:
 4. Downloading the official Vulkan release for comparison
 5. SHA-256 hashes for the official release DLLs and the patched HIP backend
 
-## Running it
+## Quick start
 
-Prerequisites:
+Requirements: Windows 11, an AMD GPU supported by the ROCm 10.0 wheels (tested on a Radeon 860M, gfx1152), and Python 3.11+.
 
-1. Build the backend(s) following [BUILD.md](BUILD.md), or download the official llama.cpp Windows releases.
-2. The model: [unsloth/Qwen3.6-35B-A3B-MTP-GGUF](https://huggingface.co/unsloth/Qwen3.6-35B-A3B-MTP-GGUF), `UD-Q4_K_XL` (~21 GB). Set `LLM_MODEL_PATH` to the file, or put it at `~\Models\Qwen3.6-35B-A3B-MTP-UD-Q4_K_XL.gguf`.
+1. Put a `.gguf` model in the `models\` folder ([unsloth/Qwen3.6-35B-A3B-MTP-GGUF](https://huggingface.co/unsloth/Qwen3.6-35B-A3B-MTP-GGUF), `UD-Q4_K_XL`, ~21 GB, is what this repo is tuned for) and set `$ModelName` at the top of `llm.ps1` to its file name.
+2. Install the backend:
 
-```powershell
-$env:LLM_MODEL_PATH = 'D:\Models\Qwen3.6-35B-A3B-MTP-UD-Q4_K_XL.gguf'   # optional
-.\llm.ps1
-```
+   ```powershell
+   .\llm.ps1 -Update
+   ```
+
+   This creates the isolated ROCm runtime in `workocm10-runtime` if it is missing, downloads the newest official llama.cpp Windows ROCm release into `workackends\`, smoke-tests it with your model, and only then makes it the active backend. Re-run it any time to upgrade; old versions stay on disk. Use `-Tag b11888` to install or roll back to a specific release.
+3. Start the server:
+
+   ```powershell
+   .\llm.ps1
+   ```
+
+The reproducible benchmark setup (pinned b11888 plus the optional patched DLL) is documented in [BUILD.md](BUILD.md).
 
 With explicit options:
 
