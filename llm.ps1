@@ -7,7 +7,13 @@ param(
     [switch]$ListDevices,
     [switch]$Update,
     [switch]$DownloadModel,
-    [string]$Tag
+    [string]$Tag,
+    [ValidateSet(1,2,3)][int]$DraftTokens = 2,
+    [ValidateSet('auto','mtp','off')][string]$Speculative = 'auto',
+    [ValidateSet('f16','q8_0')][string]$KvCache = 'f16',
+    [ValidateRange(1, 65535)][int]$Port = 9931,
+    [ValidateRange(1024, 1048576)][int]$Context = 163840,
+    [string]$BackendDirectory
 )
 
 # File name of the model in .\models. Leave empty to use the only .gguf in that folder.
@@ -39,4 +45,14 @@ if (-not $ListDevices -and -not $haveModel) {
     throw "No model found in $modelsDir.`nRun .\llm.ps1 -DownloadModel, or place a .gguf there (and set `$ModelName if there are several)."
 }
 
-& (Join-Path $PSScriptRoot 'outputs\Start-ROCmServer.ps1') -ListDevices:$ListDevices -ModelPath $modelPath
+$startArgs = @{
+    ListDevices = $ListDevices
+    ModelPath   = $modelPath
+    DraftTokens = $DraftTokens
+    Speculative = $Speculative
+    KvCache     = $KvCache
+    Port        = $Port
+    Context     = $Context
+}
+if ($BackendDirectory) { $startArgs.BackendDirectory = $BackendDirectory }
+& (Join-Path $PSScriptRoot 'outputs\Start-ROCmServer.ps1') @startArgs

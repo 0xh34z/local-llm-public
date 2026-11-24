@@ -4,7 +4,13 @@ param(
     [ValidateSet('ROCm0', 'Vulkan0')][string]$Device = 'ROCm0'
 )
 $ErrorActionPreference = 'Stop'
-$rocmBackendDirectory = Join-Path (Split-Path -Parent $PSScriptRoot) 'work\backends\llama-b11888-bin-win-rocm-10.0-x64'
+$rocmWorkspace = Split-Path -Parent $PSScriptRoot
+$rocmBackendDirectory = Join-Path $rocmWorkspace 'work\backends\llama-b11888-bin-win-rocm-10.0-x64'
+$rocmCurrentFile = Join-Path $rocmWorkspace 'work\backends\current.txt'
+if (Test-Path -LiteralPath $rocmCurrentFile) {
+    $rocmCurrent = (Get-Content -LiteralPath $rocmCurrentFile -Raw).Trim()
+    if ($rocmCurrent) { $rocmBackendDirectory = Join-Path $rocmWorkspace "work\backends\$rocmCurrent" }
+}
 if ($BackendDirectory) { $rocmBackendDirectory = [IO.Path]::GetFullPath($BackendDirectory) }
 $rocmExpectedExe = Join-Path $rocmBackendDirectory 'llama-server.exe'
 $rocmMatches = @(Get-CimInstance Win32_Process -Filter "Name = 'llama-server.exe'" | Where-Object {

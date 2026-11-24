@@ -32,10 +32,14 @@ $slotFingerprint = [ordered]@{
     Build = $slotProps.build_info
     Context = $slotProps.default_generation_settings.n_ctx
 }
-foreach ($slotFlag in @('-ctk','-ctv','--spec-type','--spec-draft-n-max','-b','-ub')) {
+foreach ($slotFlag in @('-ctk','-ctv','-b','-ub')) {
     $slotFlagMatch = [regex]::Match($slotCommandLine, '(?:^|\s)' + [regex]::Escape($slotFlag) + '\s+(\S+)')
     if (-not $slotFlagMatch.Success) { throw "Cannot verify server flag $slotFlag." }
     $slotFingerprint[$slotFlag] = $slotFlagMatch.Groups[1].Value
+}
+foreach ($slotOptionalFlag in @('--spec-type','--spec-draft-n-max')) {
+    $slotFlagMatch = [regex]::Match($slotCommandLine, '(?:^|\s)' + [regex]::Escape($slotOptionalFlag) + '\s+(\S+)')
+    $slotFingerprint[$slotOptionalFlag] = if ($slotFlagMatch.Success) { $slotFlagMatch.Groups[1].Value } else { $null }
 }
 $slotFingerprintJson = ConvertTo-Json -InputObject $slotFingerprint -Compress
 if ($Action -eq 'Restore') {

@@ -80,7 +80,7 @@ Requirements: Windows 11, an AMD GPU supported by the ROCm 10.0 wheels (tested o
    ```
 
    This creates the isolated ROCm runtime in `work
-ocm10-runtime` if it is missing, downloads the newest official llama.cpp Windows ROCm release into `workackends\`, smoke-tests it with your model, and only then makes it the active backend. Re-run it any time to upgrade; old versions stay on disk. Use `-Tag b11888` to install or roll back to a specific release.
+ocm10-runtime` if it is missing, downloads the newest official llama.cpp Windows ROCm release into `work\backends\`, smoke-tests it with your model, and only then makes it the active backend. Re-run it any time to upgrade; old versions stay on disk. Use `-Tag b11888` to install or roll back to a specific release.
 3. Start the server:
 
    ```powershell

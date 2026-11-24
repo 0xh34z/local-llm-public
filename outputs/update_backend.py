@@ -13,15 +13,24 @@ import argparse
 import fnmatch
 import hashlib
 import json
+import os
+import shutil
 import subprocess
 import sys
+import tarfile
 import time
 import urllib.request
 import zipfile
 from pathlib import Path
 
+IS_WIN = sys.platform == 'win32'
 API = 'https://api.github.com/repos/ggml-org/llama.cpp/releases'
-PATTERN = 'llama-*-bin-win-rocm-*-x64.zip'
+PATTERNS = (
+    ['llama-*-bin-win-rocm-*-x64.zip']
+    if IS_WIN
+    else ['llama-*-bin-ubuntu-rocm-*-x64.tar.gz', 'llama-*-bin-ubuntu-rocm-*-x64.zip']
+)
+SERVER_BIN = 'llama-server.exe' if IS_WIN else 'llama-server'
 ROOT = Path(__file__).resolve().parent.parent
 BACKENDS = ROOT / 'work' / 'backends'
 CURRENT = BACKENDS / 'current.txt'
@@ -34,7 +43,10 @@ def get_json(url):
 
 
 def rocm_assets(release):
-    return [a for a in release.get('assets', []) if fnmatch.fnmatch(a['name'], PATTERN)]
+    return [
+        a for a in release.get('assets', [])
+        if any(fnmatch.fnmatch(a['name'], pat) for pat in PATTERNS)
+    ]
 
 
 def find_release(tag):
@@ -42,12 +54,15 @@ def find_release(tag):
         releases = [get_json(f'{API}/tags/{tag}')]
     else:
         # /releases/latest can point at a non-build placeholder, and upstream flags every
-        # build as a pre-release, so take the newest non-draft release that ships the zip.
+        # build as a pre-release, so take the newest non-draft release that ships the asset.
         releases = [r for r in get_json(f'{API}?per_page=50') if not r.get('draft')]
     for release in releases:
         if rocm_assets(release):
             return release
-    sys.exit(f'No release with a Windows ROCm asset ({PATTERN}) found' + (f' for tag {tag}.' if tag else '.'))
+    sys.exit(
+        f'No release with a ROCm asset ({", ".join(PATTERNS)}) found'
+        + (f' for tag {tag}.' if tag else '.')
+    )
 
 
 def download(asset, dest_zip):
@@ -64,14 +79,26 @@ def download(asset, dest_zip):
         sys.exit(f"SHA256 mismatch for {asset['name']}")
 
 
+def rocm_lib_dirs():
+    venv = ROOT / 'work' / 'rocm10-runtime'
+    if IS_WIN:
+        site = venv / 'Lib' / 'site-packages'
+        return [site / '_rocm_sdk_core' / 'bin', site / '_rocm_sdk_libraries' / 'bin']
+    lib_candidates = list((venv / 'lib').glob('python*/site-packages'))
+    if not lib_candidates:
+        return []
+    site = lib_candidates[0]
+    return [p for p in (site / '_rocm_sdk_core' / 'lib', site / '_rocm_sdk_libraries' / 'lib') if p.is_dir()]
+
+
 def ensure_runtime(gfx):
     """Create the isolated ROCm runtime venv (BUILD.md step 1) if it is missing."""
     venv = ROOT / 'work' / 'rocm10-runtime'
-    if (venv / 'Lib' / 'site-packages' / '_rocm_sdk_core' / 'bin').is_dir():
+    if rocm_lib_dirs() and all(d.is_dir() for d in rocm_lib_dirs()):
         return
     print('ROCm runtime missing; installing into work/rocm10-runtime (large download) ...')
     subprocess.run([sys.executable, '-m', 'venv', str(venv)], check=True)
-    py = str(venv / 'Scripts' / 'python.exe')
+    py = str(venv / ('Scripts/python.exe' if IS_WIN else 'bin/python'))
     subprocess.run([py, '-m', 'pip', 'install', '--upgrade', 'pip'], check=True)
     subprocess.run([py, '-m', 'pip', 'install', '--index-url', 'https://stable.repo.amd.com/rocm/whl-next/',
                     'rocm==10.0.0', 'rocm-sdk-core==10.0.0', 'rocm-sdk-libraries==10.0.0',
@@ -79,31 +106,78 @@ def ensure_runtime(gfx):
 
 
 def find_server(directory):
-    return next(directory.rglob('llama-server.exe'), None)
+    return next(directory.rglob(SERVER_BIN), None)
+
+
+def extract_atomic(archive_path, dest):
+    tmp = dest.with_name(dest.name + '.tmp')
+    if tmp.exists():
+        shutil.rmtree(tmp)
+    tmp.mkdir(parents=True, exist_ok=True)
+    try:
+        if archive_path.name.endswith('.zip'):
+            with zipfile.ZipFile(archive_path) as z:
+                z.extractall(tmp)
+        else:
+            with tarfile.open(archive_path, 'r:*') as t:
+                t.extractall(tmp)
+        if not find_server(tmp):
+            sys.exit(f'{SERVER_BIN} not found after extracting {archive_path.name}')
+        if dest.exists():
+            shutil.rmtree(dest)
+        tmp.rename(dest)
+    except Exception:
+        shutil.rmtree(tmp, ignore_errors=True)
+        raise
 
 
 def smoke_test(server_dir, model, port, timeout):
     print(f'Smoke test on port {port} ...')
     log = ROOT / 'work' / 'update-smoke-test.log'
-    cmd = ['powershell', '-NoProfile', '-File', str(ROOT / 'outputs' / 'Start-ROCmServer.ps1'),
-           '-BackendDirectory', str(server_dir), '-ModelPath', str(model), '-Port', str(port),
-           '-Context', '4096', '-SlotSavePath', str(ROOT / 'work' / 'slot-cache-test'), '-LogPath', str(log)]
-    proc = subprocess.Popen(cmd, creationflags=getattr(subprocess, 'CREATE_NO_WINDOW', 0))
-    ok = False
-    try:
-        deadline = time.time() + timeout
-        while time.time() < deadline and proc.poll() is None:
-            try:
-                with urllib.request.urlopen(f'http://127.0.0.1:{port}/health', timeout=3) as r:
-                    if r.status == 200:
-                        ok = True
-                        break
-            except OSError:
-                pass
-            time.sleep(3)
-    finally:
-        if proc.poll() is None:
-            subprocess.run(['taskkill', '/PID', str(proc.pid), '/T', '/F'], capture_output=True)
+    slot_dir = ROOT / 'work' / 'slot-cache-test'
+    slot_dir.mkdir(parents=True, exist_ok=True)
+    env = os.environ.copy()
+    libs = [str(d) for d in rocm_lib_dirs() if d.is_dir()]
+    if libs:
+        var = 'PATH' if IS_WIN else 'LD_LIBRARY_PATH'
+        env[var] = os.pathsep.join(libs + ([env[var]] if env.get(var) else []))
+    cmd = [
+        str(server_dir / SERVER_BIN),
+        '-m', str(model), '--device', 'ROCm0',
+        '-c', '4096', '-np', '1', '-ngl', '99', '-fa', 'on', '--jinja',
+        '-ctk', 'f16', '-ctv', 'f16', '-b', '2048', '-ub', '512',
+        '--port', str(port), '-lm', 'auto', '-lv', '3',
+        '--slot-save-path', str(slot_dir),
+    ]
+    if 'MTP' in Path(model).name:
+        cmd += ['--spec-type', 'draft-mtp', '--spec-draft-n-max', '2']
+    with open(log, 'w', encoding='utf-8') as log_f:
+        proc = subprocess.Popen(
+            cmd, env=env, stdout=log_f, stderr=subprocess.STDOUT,
+            creationflags=getattr(subprocess, 'CREATE_NO_WINDOW', 0) if IS_WIN else 0,
+        )
+        ok = False
+        try:
+            deadline = time.time() + timeout
+            while time.time() < deadline and proc.poll() is None:
+                try:
+                    with urllib.request.urlopen(f'http://127.0.0.1:{port}/health', timeout=3) as r:
+                        if r.status == 200:
+                            ok = True
+                            break
+                except OSError:
+                    pass
+                time.sleep(3)
+        finally:
+            if proc.poll() is None:
+                if IS_WIN:
+                    subprocess.run(['taskkill', '/PID', str(proc.pid), '/T', '/F'], capture_output=True)
+                else:
+                    proc.terminate()
+                    try:
+                        proc.wait(timeout=10)
+                    except subprocess.TimeoutExpired:
+                        proc.kill()
     return ok, log
 
 
@@ -124,13 +198,14 @@ def main():
     asset = next((a for a in assets if 'rocm-10.0' in a['name']), assets[0])  # match repo's ROCm 10.0 runtime
     print(f"Release {release['tag_name']} -> {asset['name']}")
 
-    dest = BACKENDS / asset['name'].removesuffix('.zip')
+    archive_name = asset['name']
+    folder_name = archive_name[:-len('.tar.gz')] if archive_name.endswith('.tar.gz') else archive_name.removesuffix('.zip')
+    dest = BACKENDS / folder_name
     if not (dest.exists() and find_server(dest)):
-        zip_path = ROOT / 'work' / asset['name']
-        download(asset, zip_path)
-        with zipfile.ZipFile(zip_path) as z:
-            z.extractall(dest)
-        zip_path.unlink()
+        archive_path = ROOT / 'work' / archive_name
+        download(asset, archive_path)
+        extract_atomic(archive_path, dest)
+        archive_path.unlink()
     server = find_server(dest)
     if not server:
         sys.exit(f"llama-server.exe not found after extracting {asset['name']}")

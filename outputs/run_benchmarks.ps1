@@ -171,7 +171,19 @@ if ($Runtime -eq 'vulkan') {
     $defaultDevice = 'Vulkan0'
     $dll = 'ggml-vulkan.dll'
 } else {
-    $backend = if ($BackendDirectory) { $BackendDirectory } else { Join-Path $root 'work\hip-kv-split-bin' }
+    $kvSplitBackend = Join-Path $root 'work\hip-kv-split-bin'
+    if ($BackendDirectory) {
+        $backend = $BackendDirectory
+    } elseif (Test-Path -LiteralPath $kvSplitBackend) {
+        $backend = $kvSplitBackend
+    } else {
+        $currentFile = Join-Path $root 'work\backends\current.txt'
+        if (Test-Path -LiteralPath $currentFile) {
+            $currentRel = (Get-Content -LiteralPath $currentFile -Raw).Trim()
+            if ($currentRel) { $backend = Join-Path $root "work\backends\$currentRel" }
+        }
+        if (-not $backend) { $backend = $kvSplitBackend }
+    }
     $defaultDevice = 'ROCm0'
     $dll = 'ggml-hip.dll'
 }
@@ -183,6 +195,10 @@ foreach ($required in @((Join-Path $backend 'llama-server.exe'), (Join-Path $bac
 
 $model = $ModelPath
 if (-not $model) { $model = $env:LLM_MODEL_PATH }
+if (-not $model) {
+    $repoModels = @(Get-ChildItem -LiteralPath (Join-Path $root 'models') -Filter *.gguf -ErrorAction SilentlyContinue)
+    if ($repoModels.Count -eq 1) { $model = $repoModels[0].FullName }
+}
 if (-not $model) { $model = Join-Path $HOME 'Models\Qwen3.6-35B-A3B-MTP-UD-Q4_K_XL.gguf' }
 $model = [IO.Path]::GetFullPath($model)
 if (-not (Test-Path -LiteralPath $model)) { throw "Model not found: $model. Set -ModelPath, LLM_MODEL_PATH, or place it under ~\Models." }

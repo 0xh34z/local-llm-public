@@ -6,15 +6,26 @@
 $ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $PSScriptRoot
 Set-Location -LiteralPath $root
-$failures = @()
+$script:failures = @()
 
 function Invoke-Check {
     param([string]$Name, [string]$File, [string[]]$Arguments)
     Write-Host ''
     Write-Host "=== $Name ===" -ForegroundColor Cyan
-    & $File @Arguments
-    $code = $LASTEXITCODE
-    if ($code -ne 0) { $failures += "$Name (exit $code)" }
+    if (-not (Get-Command $File -ErrorAction SilentlyContinue)) {
+        Write-Host "Missing required tool: $File" -ForegroundColor Yellow
+        $script:failures += "$Name (missing '$File')"
+        return
+    }
+    $prevPref = $ErrorActionPreference
+    $ErrorActionPreference = 'Continue'
+    try {
+        & $File @Arguments
+        $code = $LASTEXITCODE
+    } finally {
+        $ErrorActionPreference = $prevPref
+    }
+    if ($code -ne 0) { $script:failures += "$Name (exit $code)" }
 }
 
 # Parse every PowerShell script without executing it.
